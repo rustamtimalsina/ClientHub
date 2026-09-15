@@ -24,22 +24,21 @@
         }
 
         * { box-sizing: border-box; }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f3f4f6;
+    color: var(--text);
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: var(--bg);
-            color: var(--text);
-        }
-
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--primary);
-            color: white;
-            padding: 20px 40px;
-        }
+       .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #111827;
+    color: white;
+    padding: 18px 40px;
+}
 
         .navbar h2 {
             margin: 0;
@@ -64,12 +63,12 @@
             background: rgba(255, 255, 255, 0.12);
             border-color: rgba(255, 255, 255, 0.55);
         }
-
-        .container {
-            max-width: 1100px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
+.container {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 40px 28px 60px;
+}
 
         .card {
             background: var(--surface);
@@ -742,7 +741,202 @@
             padding: 20px 22px 24px;
         }
     }
+.dashboard-welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    margin-bottom: 28px;
+}
 
+.dashboard-eyebrow {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #2563eb;
+}
+
+.dashboard-welcome h1 {
+    margin: 0;
+    font-size: 32px;
+    line-height: 1.2;
+    color: #111827;
+}
+
+.dashboard-welcome p:not(.dashboard-eyebrow) {
+    margin: 8px 0 0;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+.dashboard-date {
+    padding: 10px 14px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+@media (max-width: 700px) {
+    .dashboard-welcome {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+.current-project-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+    margin-bottom: 28px;
+}
+
+.current-project-header {
+    padding: 30px 32px;
+}
+
+.project-label {
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.current-project-title {
+    margin-top: 8px;
+    font-size: 28px;
+    color: #111827;
+}
+
+.current-project-description {
+    color: #6b7280;
+    max-width: 650px;
+}
+
+.project-info-grid {
+    background: #f8fafc;
+    margin-top: 0;
+}
+
+.project-progress-section {
+    padding: 24px 32px 30px;
+}
+
+.progress-bar {
+    height: 10px;
+    background: #e5e7eb;
+}
+
+.progress-bar-fill {
+    background: #2563eb;
+}
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.dashboard-grid > * {
+    min-width: 0;
+}
+
+.dashboard-grid .card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    overflow: hidden;
+}
+
+.dashboard-grid .card > h2,
+.dashboard-grid .card > h3 {
+    padding: 24px 24px 0;
+    margin-bottom: 20px;
+    color: #111827;
+}
+
+.milestone-list {
+    padding: 0 24px 24px;
+}
+
+.file-list {
+    padding: 0 24px 24px;
+}
+
+.file-item {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.file-item:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+@media (max-width: 850px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.client-invoice-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.client-invoice-card {
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    box-shadow: 0 3px 15px rgba(15, 23, 42, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.client-invoice-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.invoice-number {
+    color: #111827;
+}
+
+.invoice-card-details {
+    gap: 60px;
+}
+
+.invoice-amount {
+    color: #111827;
+}
+
+.download-invoice-button {
+    background: #111827;
+    color: #ffffff;
+    padding: 9px 15px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.download-invoice-button:hover {
+    background: #2563eb;
+}
+
+@media (max-width: 700px) {
+    .client-invoice-list {
+        grid-template-columns: 1fr;
+    }
+
+    .invoice-card-details {
+        gap: 30px;
+    }
+}
 
     </style>
 </head>

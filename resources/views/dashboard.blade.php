@@ -80,7 +80,17 @@
 <x-layouts.app title="Client Dashboard — ClientHub">
 
     <div class="dashboard">
+<div class="dashboard-welcome">
+    <div>
+        <p class="dashboard-eyebrow">CLIENT PORTAL</p>
+        <h1>Welcome back, {{ $userName }}</h1>
+        <p>Here's an overview of your project, milestones, files, and invoices.</p>
+    </div>
 
+    <div class="dashboard-date">
+        {{ now()->format('M d, Y') }}
+    </div>
+</div>
         <!-- {{-- Page Header --}}
         <div class="dashboard-header">
             <div>
