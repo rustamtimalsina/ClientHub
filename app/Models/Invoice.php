@@ -17,9 +17,14 @@ class Invoice extends Model
         'created_at',
         'updated_at',
     ];
-    protected $casts = [
+       protected $casts = [
         'amount' => 'decimal:2',
         'issued_at' => 'date',
         'due_date' => 'date',
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

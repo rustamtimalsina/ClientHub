@@ -1,4 +1,3 @@
-
 @php
     $labels = [
         'completed' => 'Completed',
@@ -9,8 +8,19 @@
     ];
 
     $label = $labels[$status] ?? ucfirst(str_replace('_', ' ', $status));
+
+    // NEW: pick a color group per status
+    $classes = [
+        'completed' => 'badge-success',
+        'paid' => 'badge-success',
+        'in_progress' => 'badge-warning',
+        'pending' => 'badge-neutral',
+        'overdue' => 'badge-danger',
+    ];
+
+    $class = $classes[$status] ?? 'badge-neutral';
 @endphp
 
-<span class="badge">
+<span class="badge {{ $class }}">
     {{ $label }}
 </span>

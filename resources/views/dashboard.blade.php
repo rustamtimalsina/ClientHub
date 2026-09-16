@@ -1,79 +1,15 @@
 @php
-    /*
-    |--------------------------------------------------------------------------
-    | Static Demo Data
-    |--------------------------------------------------------------------------
-    | No database, authentication, models, or relationships are required.
-    */
+    $userName = auth()->user()->name ?? 'there';
 
-    $userName = 'John Doe';
+    $milestones = $project?->milestones ?? collect();
+    $files = $project?->files ?? collect();
+    $invoices = $project?->invoices ?? collect();
 
-    $project = (object) [
-        'name' => 'ClientHub Website',
-        'description' => 'Design and development of the new ClientHub website.',
-        'status' => 'in_progress',
-        'clientName' => 'John Doe',
-        'startDate' => 'Aug 01, 2026',
-        'dueDate' => 'Sep 30, 2026',
-        'progress' => 65,
-    ];
-
-    $milestones = [
-        (object) [
-            'title' => 'UI/UX Design',
-            'description' => 'Complete the user interface and user experience designs.',
-            'status' => 'completed',
-            'dueDate' => 'Aug 10, 2026',
-            'completedAt' => 'Aug 10, 2026',
-            'reviewUrl' => '#',
-        ],
-        (object) [
-            'title' => 'Frontend Development',
-            'description' => 'Build the responsive frontend based on the approved designs.',
-            'status' => 'in_progress',
-            'dueDate' => 'Aug 30, 2026',
-            'completedAt' => null,
-            'reviewUrl' => '#',
-        ],
-        (object) [
-            'title' => 'Backend Integration',
-            'description' => 'Connect the frontend with the required backend services.',
-            'status' => 'pending',
-            'dueDate' => 'Sep 15, 2026',
-            'completedAt' => null,
-            'reviewUrl' => null,
-        ],
-    ];
-
-    $files = [
-        (object) [
-            'originalName' => 'project-requirements.pdf',
-            'createdAt' => 'Aug 02, 2026',
-        ],
-        (object) [
-            'originalName' => 'ui-designs.fig',
-            'createdAt' => 'Aug 10, 2026',
-        ],
-        (object) [
-            'originalName' => 'project-assets.zip',
-            'createdAt' => 'Aug 15, 2026',
-        ],
-    ];
-
-    $invoices = [
-        (object) [
-            'invoiceNumber' => 'INV-2026-001',
-            'status' => 'paid',
-            'issuedAt' => 'Aug 05, 2026',
-            'amount' => 45000.00,
-        ],
-        (object) [
-            'invoiceNumber' => 'INV-2026-002',
-            'status' => 'pending',
-            'issuedAt' => 'Aug 20, 2026',
-            'amount' => 32500.00,
-        ],
-    ];
+    $totalMilestones = $milestones->count();
+    $completedMilestones = $milestones->where('status', 'completed')->count();
+    $progress = $totalMilestones > 0
+        ? (int) round(($completedMilestones / $totalMilestones) * 100)
+        : 0;
 @endphp
 
 
@@ -82,7 +18,7 @@
     <div class="dashboard">
 <div class="dashboard-welcome">
     <div>
-        <p class="dashboard-eyebrow">CLIENT PORTAL</p>
+        <p class="dashboard-eyebrow">Client Portal</p>
         <h1>Welcome back, {{ $userName }}</h1>
         <p>Here's an overview of your project, milestones, files, and invoices.</p>
     </div>
@@ -91,24 +27,17 @@
         {{ now()->format('M d, Y') }}
     </div>
 </div>
-        <!-- {{-- Page Header --}}
-        <div class="dashboard-header">
-            <div>
-                <p class="eyebrow">CLIENT PORTAL</p>
 
-                <h1>Client Dashboard</h1>
+@if(!$project)
 
-                <p class="dashboard-subtitle">
-                    Track your project progress, review submitted work,
-                    access files, and manage invoices.
-                </p>
-            </div>
+    <x-card>
+        <x-empty-state
+            title="No project yet"
+            message="You don't have a project assigned yet. Your project manager will set one up soon."
+        />
+    </x-card>
 
-            <div class="header-user">
-                <span>Welcome back</span>
-                <strong>{{ $userName }}</strong>
-            </div>
-        </div> -->
+@else
 
 {{-- Current Project --}}
 <x-card class="current-project-card">
@@ -119,7 +48,7 @@
         <div class="project-title-section">
 
             <span class="project-label">
-                CURRENT PROJECT
+                Current Project
             </span>
 
             <h1 class="current-project-title">
@@ -151,7 +80,7 @@
             </span>
 
             <strong>
-                {{ $project->clientName }}
+                {{ $project->client->name ?? 'N/A' }}
             </strong>
 
         </div>
@@ -164,7 +93,7 @@
             </span>
 
             <strong>
-                {{ $project->startDate ?? 'Not set' }}
+                {{ $project->start_date?->format('M d, Y') ?? 'Not set' }}
             </strong>
 
         </div>
@@ -177,7 +106,7 @@
             </span>
 
             <strong>
-                {{ $project->dueDate ?? 'Not set' }}
+                {{ $project->due_date?->format('M d, Y') ?? 'Not set' }}
             </strong>
 
         </div>
@@ -195,7 +124,7 @@
             </span>
 
             <strong>
-                {{ $project->progress ?? 0 }}%
+                {{ $progress }}%
             </strong>
 
         </div>
@@ -205,7 +134,7 @@
 
             <div
                 class="progress-bar-fill"
-                style="width: {{ $project->progress ?? 0 }}%"
+                style="width: {{ $progress }}%"
             ></div>
 
         </div>
@@ -257,27 +186,21 @@
 
 
                                     <div class="milestone-actions">
+@if($milestone->status !== 'completed')
 
-                                        @if($milestone->status !== 'completed')
+    <form
+        method="POST"
+        action="{{ route('milestones.complete', $milestone) }}"
+        onsubmit="return confirm('Have you reviewed the submitted work and confirmed that you are satisfied?');"
+        style="display: inline;"
+    >
+        @csrf
+        <button type="submit" class="btn btn-success btn-small">
+            Mark Complete
+        </button>
+    </form>
 
-                                            <button
-                                                type="button"
-                                                class="btn btn-success btn-small"
-                                                onclick="
-                                                    event.preventDefault();
-
-                                                    if (confirm(
-                                                        'Have you reviewed the submitted work and confirmed that you are satisfied?'
-                                                    )) {
-                                                        this.textContent = '✓ Completed';
-                                                        this.disabled = true;
-                                                    }
-                                                "
-                                            >
-                                                Mark Complete
-                                            </button>
-
-                                        @else
+@else
 
                                             <span class="milestone-completed">
                                                 ✓ Completed
@@ -297,20 +220,7 @@
                                 {{-- Expanded Details --}}
                                 <div class="milestone-card-details">
 
-                                    <div class="milestone-detail">
-
-                                        <span class="detail-label">
-                                            Due Date
-                                        </span>
-
-                                        <strong>
-                                            {{ $milestone->dueDate ?? 'No due date' }}
-                                        </strong>
-
-                                    </div>
-
-
-                                    @if($milestone->completedAt)
+                                    @if($milestone->completed_at)
 
                                         <div class="milestone-detail">
 
@@ -319,30 +229,8 @@
                                             </span>
 
                                             <strong>
-                                                {{ $milestone->completedAt }}
+                                                {{ $milestone->completed_at->format('M d, Y') }}
                                             </strong>
-
-                                        </div>
-
-                                    @endif
-
-
-                                    @if($milestone->reviewUrl)
-
-                                        <div class="milestone-detail milestone-review">
-
-                                            <span class="detail-label">
-                                                Submitted Work
-                                            </span>
-
-                                            <a
-                                                href="{{ $milestone->reviewUrl }}"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                class="table-link"
-                                            >
-                                                View Submitted Work
-                                            </a>
 
                                         </div>
 
@@ -381,28 +269,29 @@
                                 <div class="file-info">
 
                                     <div class="file-icon">
-                                        {{ strtoupper(pathinfo($file->originalName, PATHINFO_EXTENSION)) ?: 'FILE' }}
+                                        {{ strtoupper(pathinfo($file->original_name, PATHINFO_EXTENSION)) ?: 'FILE' }}
                                     </div>
 
                                     <div>
                                         <strong>
-                                            {{ $file->originalName }}
+                                            {{ $file->original_name }}
                                         </strong>
 
                                         <span>
                                             Uploaded
-                                            {{ $file->createdAt }}
+                                            {{ $file->created_at->format('M d, Y') }}
                                         </span>
                                     </div>
 
                                 </div>
 
                                 <a
-                                    href="#"
-                                    class="btn btn-small"
-                                >
-                                    Download
-                                </a>
+                                   
+    href="{{ route('files.download', $file) }}"
+    class="btn btn-small"
+>
+    Download
+</a>
 
                             </div>
 
@@ -440,7 +329,7 @@
                         <div>
 
                             <span class="invoice-number">
-                                {{ $invoice->invoiceNumber }}
+                                {{ $invoice->invoice_number }}
                             </span>
 
                             <p>
@@ -465,7 +354,7 @@
                             </span>
 
                             <strong>
-                                {{ $invoice->issuedAt }}
+                                {{ $invoice->issued_at?->format('M d, Y') ?? '—' }}
                             </strong>
 
                         </div>
@@ -489,11 +378,12 @@
                     <div class="invoice-card-actions">
 
                         <a
-                            href="#"
-                            class="download-invoice-button"
-                        >
-                            Download Invoice
-                        </a>
+                           
+    href="{{ route('invoices.download', $invoice) }}"
+    class="download-invoice-button"
+>
+    Download Invoice
+</a>
 
                     </div>
 
@@ -506,6 +396,8 @@
     @endif
 
 </x-card>
+
+@endif
     </div>
 
 </x-layouts.app>

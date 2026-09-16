@@ -133,13 +133,21 @@ body {
             font-weight: bold;
             white-space: nowrap;
         }
+        .badge-success { background: var(--success-bg); color: var(--success-text); }
+.badge-warning { background: var(--warning-bg); color: var(--warning-text); }
+.badge-danger { background: var(--danger-bg); color: var(--danger-text); }
+.badge-neutral { background: var(--neutral-bg); color: var(--neutral-text); }
 
         .empty-state {
-            color: var(--muted);
-            font-size: 14px;
-            padding: 8px 0;
-            margin: 0;
-        }
+    color: var(--muted);
+    font-size: 14px;
+    padding: 28px 20px;
+    margin: 0;
+    text-align: center;
+    background: #fafafa;
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+}
 
         a {
             color: var(--primary);
