@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class InvoiceController extends Controller
 {
@@ -14,18 +15,8 @@ class InvoiceController extends Controller
             403
         );
 
-        $content = "ClientHub Invoice\n";
-        $content .= "==================\n\n";
-        $content .= "Invoice Number: {$invoice->invoice_number}\n";
-        $content .= "Project: {$invoice->project->name}\n";
-        $content .= "Status: {$invoice->status}\n";
-        $content .= "Issued: " . ($invoice->issued_at?->format('M d, Y') ?? '—') . "\n";
-        $content .= "Due: " . ($invoice->due_date?->format('M d, Y') ?? '—') . "\n";
-        $content .= "Amount: NPR " . number_format($invoice->amount, 2) . "\n";
+        $pdf = Pdf::loadView('invoice-pdf', compact('invoice'));
 
-        return response()->streamDownload(
-            fn () => print($content),
-            "{$invoice->invoice_number}.txt"
-        );
+        return $pdf->download("{$invoice->invoice_number}.pdf");
     }
 }
