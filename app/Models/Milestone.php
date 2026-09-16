@@ -19,8 +19,8 @@ class Milestone extends Model
     protected $casts = [
         'completed_at' => 'datetime',
     ];
-    public function milestones()
-    {
-        return $this->hasMany(Milestone::class);
-    }
+    public function project()
+{
+    return $this->belongsTo(Project::class);
+}
 }

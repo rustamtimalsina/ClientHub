@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
-{
-    $user = User::first();
+    {
+        $user = Auth::user();
 
-    $project = $user?->project;
+        $project = $user?->projects()->first();
 
-    return view('dashboard', compact('project'));
-}
+        return view('dashboard', compact('project'));
+    }
 }

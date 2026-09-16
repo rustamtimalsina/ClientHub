@@ -25,6 +25,10 @@ class Project extends Model
     {
         return $this->belongsTo(User::class, 'client_id');
     }
+    public function milestones()
+{
+    return $this->hasMany(Milestone::class);
+}
     public function files()
     {
         return $this->hasMany(ProjectFile::class);
@@ -32,9 +36,5 @@ class Project extends Model
     public function invoices()
     {
         return $this->hasMany(Invoice::class);
-    }
-    public function milestones()
-    {
-        return $this->hasMany(Milestone::class);
     }
 }
