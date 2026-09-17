@@ -6,7 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\ProjectFileController;
 use App\Http\Controllers\InvoiceController;
-
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\MilestoneController as AdminMilestoneController;
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -36,3 +37,12 @@ Route::get('/files/{projectFile}/download', [ProjectFileController::class, 'down
 Route::get('/invoices/{invoice}/download', [InvoiceController::class, 'download'])
     ->middleware('auth')
     ->name('invoices.download');
+
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/projects', [AdminProjectController::class, 'index'])->name('admin.projects.index');
+    Route::get('/projects/create', [AdminProjectController::class, 'create'])->name('admin.projects.create');
+    Route::post('/projects', [AdminProjectController::class, 'store'])->name('admin.projects.store');
+
+    Route::get('/projects/{project}/milestones', [AdminMilestoneController::class, 'create'])->name('admin.milestones.create');
+    Route::post('/projects/{project}/milestones', [AdminMilestoneController::class, 'store'])->name('admin.milestones.store');
+});
