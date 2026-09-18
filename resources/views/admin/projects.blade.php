@@ -26,9 +26,12 @@
                                 <strong>{{ $project->name }}</strong>
                                 <span>Client: {{ $project->client->name ?? 'N/A' }}</span>
                             </div>
-                            <a href="{{ route('admin.milestones.create', $project) }}" class="btn btn-small">
-                                Manage Milestones
-                            </a>
+                           <a href="{{ route('admin.milestones.create', $project) }}" class="btn btn-small">
+    Manage Milestones
+</a>
+<a href="{{ route('admin.invoices.create', $project) }}" class="btn btn-small">
+    Manage Invoices
+</a>
                         </div>
                     @endforeach
                 </div>
