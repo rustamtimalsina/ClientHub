@@ -41,12 +41,16 @@ Route::get('/invoices/{invoice}/download', [InvoiceController::class, 'download'
     ->name('invoices.download');
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/projects', [AdminProjectController::class, 'index'])->name('admin.projects.index');
-    Route::get('/projects/create', [AdminProjectController::class, 'create'])->name('admin.projects.create');
-    Route::post('/projects', [AdminProjectController::class, 'store'])->name('admin.projects.store');
-
+Route::get('/projects', [AdminProjectController::class, 'index'])->name('admin.projects.index');
+Route::get('/projects/create', [AdminProjectController::class, 'create'])->name('admin.projects.create');
+Route::post('/projects', [AdminProjectController::class, 'store'])->name('admin.projects.store');
+Route::get('/projects/{project}/edit', [AdminProjectController::class, 'edit'])->name('admin.projects.edit');
+Route::put('/projects/{project}', [AdminProjectController::class, 'update'])->name('admin.projects.update');
+Route::delete('/projects/{project}', [AdminProjectController::class, 'destroy'])->name('admin.projects.destroy');
     Route::get('/projects/{project}/milestones', [AdminMilestoneController::class, 'create'])->name('admin.milestones.create');
-    Route::post('/projects/{project}/milestones', [AdminMilestoneController::class, 'store'])->name('admin.milestones.store');
+Route::post('/projects/{project}/milestones', [AdminMilestoneController::class, 'store'])->name('admin.milestones.store');
+Route::put('/projects/{project}/milestones/{milestone}', [AdminMilestoneController::class, 'update'])->name('admin.milestones.update');
+Route::delete('/projects/{project}/milestones/{milestone}', [AdminMilestoneController::class, 'destroy'])->name('admin.milestones.destroy');
 
     Route::get('/projects/{project}/invoices', [AdminInvoiceController::class, 'create'])->name('admin.invoices.create');
     Route::post('/projects/{project}/invoices', [AdminInvoiceController::class, 'store'])->name('admin.invoices.store');

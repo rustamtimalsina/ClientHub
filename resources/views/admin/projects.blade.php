@@ -26,12 +26,22 @@
                                 <strong>{{ $project->name }}</strong>
                                 <span>Client: {{ $project->client->name ?? 'N/A' }}</span>
                             </div>
-                           <a href="{{ route('admin.milestones.create', $project) }}" class="btn btn-small">
+                         <a href="{{ route('admin.milestones.create', $project) }}" class="btn btn-small">
     Manage Milestones
 </a>
 <a href="{{ route('admin.invoices.create', $project) }}" class="btn btn-small">
     Manage Invoices
 </a>
+<a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-small">
+    Edit
+</a>
+<form method="POST" action="{{ route('admin.projects.destroy', $project) }}" onsubmit="return confirm('Delete this project? This will also delete all its milestones, files, and invoices. This cannot be undone.');" style="display: inline;">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-small" style="background: #dc2626; color: white; border: none;">
+        Delete
+    </button>
+</form>
                         </div>
                     @endforeach
                 </div>
