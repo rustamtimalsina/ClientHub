@@ -9,6 +9,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\MilestoneController as AdminMilestoneController;
 use App\Http\Controllers\Admin\InvoiceController as AdminInvoiceController;
+use App\Http\Controllers\Admin\ClientController as AdminClientController;
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -49,4 +50,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/projects/{project}/invoices', [AdminInvoiceController::class, 'create'])->name('admin.invoices.create');
     Route::post('/projects/{project}/invoices', [AdminInvoiceController::class, 'store'])->name('admin.invoices.store');
+
+    Route::get('/clients', [AdminClientController::class, 'create'])->name('admin.clients.create');
+    Route::post('/clients', [AdminClientController::class, 'store'])->name('admin.clients.store');
 });

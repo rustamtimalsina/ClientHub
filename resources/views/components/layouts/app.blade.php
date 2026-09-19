@@ -950,17 +950,22 @@ body {
 </head>
 <body>
     <nav class="navbar">
-        <h2>ClientHub</h2>
-        <form method="POST"
-            action="{{ route('logout') }}"
-            class="logout-form"
-        >
+    <h2>ClientHub</h2>
+    <div style="display: flex; align-items: center; gap: 12px;">
+       @if(auth()->user()?->role === 'admin')
+    <a href="{{ route('admin.projects.index') }}" class="logout-button" style="text-decoration: none;">
+        Projects
+    </a>
+    <a href="{{ route('admin.clients.create') }}" class="logout-button" style="text-decoration: none;">
+        Clients
+    </a>
+@endif
+        <form method="POST" action="{{ route('logout') }}" class="logout-form">
             @csrf
-            <button type="submit" class="logout-button">
-                Logout
-            </button>
+            <button type="submit" class="logout-button">Logout</button>
         </form>
-    </nav>  
+    </div>
+</nav>  
     <main class="container">
         {{ $slot }}
     </main>
