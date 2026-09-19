@@ -56,7 +56,7 @@
 
         </x-card>
 
-        <x-card title="Existing Invoices">
+                <x-card title="Existing Invoices">
 
             @if($invoices->isEmpty())
                 <x-empty-state
@@ -67,25 +67,48 @@
                 <div class="client-invoice-list">
                     @foreach($invoices as $invoice)
                         <div class="client-invoice-card">
-                            <div class="invoice-card-header">
-                                <div>
-                                    <span class="invoice-number">{{ $invoice->invoice_number }}</span>
+
+                            <form method="POST" action="{{ route('admin.invoices.update', [$project, $invoice]) }}">
+                                @csrf
+                                @method('PUT')
+
+                                <div style="margin-bottom: 10px;">
+                                    <input type="text" name="invoice_number" required value="{{ $invoice->invoice_number }}" style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border); font-weight:bold;">
                                 </div>
-                                <x-status-badge :status="$invoice->status" />
-                            </div>
-                            <div class="invoice-card-details">
-                                <div>
-                                    <span class="invoice-label">Amount</span>
-                                    <strong class="invoice-amount">NPR {{ number_format($invoice->amount, 2) }}</strong>
+
+                                <div style="display:flex; gap:10px; margin-bottom: 10px;">
+                                    <input type="number" step="0.01" name="amount" required value="{{ $invoice->amount }}" style="flex:1; padding:8px; border-radius:6px; border:1px solid var(--border);">
+
+                                    <select name="status" required style="padding:8px; border-radius:6px; border:1px solid var(--border);">
+                                        <option value="pending" @selected($invoice->status === 'pending')>Pending</option>
+                                        <option value="paid" @selected($invoice->status === 'paid')>Paid</option>
+                                        <option value="overdue" @selected($invoice->status === 'overdue')>Overdue</option>
+                                    </select>
                                 </div>
-                            </div>
+
+                                <div style="display:flex; gap:10px; margin-bottom: 10px;">
+                                    <input type="date" name="issued_at" value="{{ $invoice->issued_at?->format('Y-m-d') }}" style="flex:1; padding:8px; border-radius:6px; border:1px solid var(--border);">
+                                    <input type="date" name="due_date" value="{{ $invoice->due_date?->format('Y-m-d') }}" style="flex:1; padding:8px; border-radius:6px; border:1px solid var(--border);">
+                                </div>
+
+                                <button type="submit" class="btn btn-small">Save</button>
+                            </form>
+
+                            <form method="POST" action="{{ route('admin.invoices.destroy', [$project, $invoice]) }}" onsubmit="return confirm('Delete this invoice?');" style="margin-top: 10px;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-small" style="background: #dc2626; color: white; border: none;">
+                                    Delete
+                                </button>
+                            </form>
+
                         </div>
                     @endforeach
                 </div>
             @endif
 
-        </x-card>
 
-    </div>
+        </x-card>
+        </div>
 
 </x-layouts.app>

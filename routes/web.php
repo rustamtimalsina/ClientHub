@@ -52,9 +52,10 @@ Route::post('/projects/{project}/milestones', [AdminMilestoneController::class, 
 Route::put('/projects/{project}/milestones/{milestone}', [AdminMilestoneController::class, 'update'])->name('admin.milestones.update');
 Route::delete('/projects/{project}/milestones/{milestone}', [AdminMilestoneController::class, 'destroy'])->name('admin.milestones.destroy');
 
-    Route::get('/projects/{project}/invoices', [AdminInvoiceController::class, 'create'])->name('admin.invoices.create');
-    Route::post('/projects/{project}/invoices', [AdminInvoiceController::class, 'store'])->name('admin.invoices.store');
-
+   Route::get('/projects/{project}/invoices', [AdminInvoiceController::class, 'create'])->name('admin.invoices.create');
+Route::post('/projects/{project}/invoices', [AdminInvoiceController::class, 'store'])->name('admin.invoices.store');
+Route::put('/projects/{project}/invoices/{invoice}', [AdminInvoiceController::class, 'update'])->name('admin.invoices.update');
+Route::delete('/projects/{project}/invoices/{invoice}', [AdminInvoiceController::class, 'destroy'])->name('admin.invoices.destroy');
     Route::get('/clients', [AdminClientController::class, 'create'])->name('admin.clients.create');
     Route::post('/clients', [AdminClientController::class, 'store'])->name('admin.clients.store');
 });
