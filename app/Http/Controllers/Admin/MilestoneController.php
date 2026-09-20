@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\MilestoneCompletedMail;
 use App\Models\Milestone;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class MilestoneController extends Controller
 {
@@ -42,11 +44,18 @@ class MilestoneController extends Controller
             'status' => 'required|in:pending,in_progress,completed',
         ]);
 
+               $wasAlreadyCompleted = $milestone->status === 'completed';
+
         $validated['completed_at'] = $validated['status'] === 'completed'
             ? ($milestone->completed_at ?? now())
             : null;
 
         $milestone->update($validated);
+
+        if ($validated['status'] === 'completed' && !$wasAlreadyCompleted) {
+            Mail::to($project->client->email)
+                ->send(new MilestoneCompletedMail($milestone));
+        }
 
         return redirect()->route('admin.milestones.create', $project)
             ->with('success', 'Milestone updated successfully.');

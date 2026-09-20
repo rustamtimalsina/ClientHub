@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeClientMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class ClientController extends Controller
 {
@@ -24,14 +26,16 @@ class ClientController extends Controller
             'password' => 'required|string|min:8',
         ]);
 
-        User::create([
+                $client = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'role' => 'client',
         ]);
 
+        Mail::to($client->email)->send(new WelcomeClientMail($client));
+
         return redirect()->route('admin.clients.create')
             ->with('success', 'Client account created successfully.');
     }
-}
+    }

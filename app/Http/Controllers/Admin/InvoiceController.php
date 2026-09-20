@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\InvoiceCreatedMail;
 use App\Models\Invoice;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class InvoiceController extends Controller
 {
@@ -26,7 +28,9 @@ class InvoiceController extends Controller
             'due_date' => 'nullable|date',
         ]);
 
-        $project->invoices()->create($validated);
+              $invoice = $project->invoices()->create($validated);
+
+        Mail::to($project->client->email)->send(new InvoiceCreatedMail($invoice));
 
         return redirect()->route('admin.invoices.create', $project)
             ->with('success', 'Invoice added successfully.');

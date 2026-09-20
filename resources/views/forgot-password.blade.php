@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In — ClientHub</title>
+    <title>Forgot Password — ClientHub</title>
 
     <style>
         :root {
@@ -18,10 +18,7 @@
         }
 
         * { box-sizing: border-box; }
-
-        html, body {
-            height: 100%;
-        }
+        html, body { height: 100%; }
 
         body {
             font-family: Arial, sans-serif;
@@ -34,10 +31,7 @@
             padding: 24px;
         }
 
-        .auth-wrapper {
-            width: 100%;
-            max-width: 400px;
-        }
+        .auth-wrapper { width: 100%; max-width: 400px; }
 
         .auth-brand {
             display: flex;
@@ -48,22 +42,15 @@
         }
 
         .auth-brand-mark {
-            width: 34px;
-            height: 34px;
+            width: 34px; height: 34px;
             border-radius: 9px;
             background: var(--primary);
             color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 15px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 15px;
         }
 
-        .auth-brand h1 {
-            margin: 0;
-            font-size: 20px;
-        }
+        .auth-brand h1 { margin: 0; font-size: 20px; }
 
         .auth-card {
             background: var(--surface);
@@ -72,21 +59,11 @@
             padding: 32px;
         }
 
-        .auth-heading {
-            margin: 0 0 6px;
-            font-size: 22px;
-        }
-
-        .auth-subtext {
-            margin: 0 0 26px;
-            color: var(--muted);
-            font-size: 14px;
-        }
+        .auth-heading { margin: 0 0 6px; font-size: 22px; }
+        .auth-subtext { margin: 0 0 26px; color: var(--muted); font-size: 14px; }
 
         .auth-error {
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
+            display: flex; gap: 10px; align-items: flex-start;
             background: var(--danger-bg);
             color: var(--danger-text);
             border-radius: 8px;
@@ -95,20 +72,14 @@
             margin-bottom: 20px;
         }
 
-        .form-group {
-            margin-bottom: 18px;
-        }
+        .form-group { margin-bottom: 18px; }
 
         .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 7px;
+            display: block; font-size: 13px; font-weight: 600;
+            color: var(--text); margin-bottom: 7px;
         }
 
-        .form-group input[type="email"],
-        .form-group input[type="password"] {
+        .form-group input[type="email"] {
             width: 100%;
             padding: 11px 13px;
             border: 1px solid var(--border);
@@ -125,42 +96,7 @@
             box-shadow: 0 0 0 3px rgba(31, 41, 55, 0.08);
         }
 
-        .field-error {
-            margin: 6px 0 0;
-            font-size: 12px;
-            color: var(--danger-text);
-        }
-
-        .form-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 22px;
-            font-size: 13px;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--muted);
-        }
-
-        .remember-me input {
-            width: 15px;
-            height: 15px;
-            accent-color: var(--primary);
-        }
-
-        .form-row a {
-            color: var(--text);
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .form-row a:hover {
-            text-decoration: underline;
-        }
+        .field-error { margin: 6px 0 0; font-size: 12px; color: var(--danger-text); }
 
         .auth-submit {
             width: 100%;
@@ -174,9 +110,7 @@
             cursor: pointer;
         }
 
-        .auth-submit:hover {
-            background: #111827;
-        }
+        .auth-submit:hover { background: #111827; }
 
         .auth-footer {
             text-align: center;
@@ -191,9 +125,7 @@
             text-decoration: none;
         }
 
-        .auth-footer a:hover {
-            text-decoration: underline;
-        }
+        .auth-footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -205,7 +137,11 @@
             <h1>ClientHub</h1>
         </div>
 
-            <div class="auth-card">
+        <div class="auth-card">
+
+            <h2 class="auth-heading">Forgot your password?</h2>
+            <p class="auth-subtext">Enter your email and we'll send you a reset link.</p>
+
             @if (session('success'))
                 <div class="auth-error" style="background: #dcfce7; color: #166534;">
                     <span>{{ session('success') }}</span>
@@ -218,7 +154,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('login.process') }}">
+            <form method="POST" action="{{ route('password.email') }}">
                 @csrf
                 <div class="form-group">
                     <label for="email">Email address</label>
@@ -232,43 +168,16 @@
                         required
                         autofocus
                     >
-                    @error('email')
-                        <p class="field-error">{{ $message }}</p>
-                    @enderror
                 </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="••••••••"
-                        autocomplete="current-password"
-                        required
-                    >
-                    @error('password')
-                        <p class="field-error">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="form-row">
-                    <label class="remember-me">
-                        <input type="checkbox" name="remember">
-                        Remember me
-                    </label>
-
-                    <!-- <a href="#">Forgot password?</a> -->
-                </div>
-
-                <button type="submit" class="auth-submit">Sign In</button>
+                <button type="submit" class="auth-submit">Send Reset Link</button>
 
             </form>
 
         </div>
 
         <p class="auth-footer">
-            <a href="{{ route('password.request') }}">Forgot your password?</a>
+            <a href="{{ route('login') }}">Back to login</a>
         </p>
 
     </div>
