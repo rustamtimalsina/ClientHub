@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\MilestoneController as AdminMilestoneController;
 use App\Http\Controllers\Admin\InvoiceController as AdminInvoiceController;
 use App\Http\Controllers\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\Admin\ProjectFileController as AdminFileController;
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -26,6 +27,9 @@ Route::get('/forgot-password', [PasswordResetController::class, 'showLinkRequest
 Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [PasswordResetController::class, 'reset'])->name('password.update');
+Route::get('/projects/{project}/files', [AdminFileController::class, 'create'])->name('admin.files.create');
+Route::post('/projects/{project}/files', [AdminFileController::class, 'store'])->name('admin.files.store');
+Route::delete('/projects/{project}/files/{file}', [AdminFileController::class, 'destroy'])->name('admin.files.destroy');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware('auth')
