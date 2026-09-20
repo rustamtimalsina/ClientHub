@@ -31,6 +31,10 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware('auth')
     ->name('dashboard');
 
+Route::get('/dashboard/{project}', [DashboardController::class, 'index'])
+    ->middleware('auth')
+    ->name('dashboard.project');
+
 Route::post('/logout', [LoginController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');

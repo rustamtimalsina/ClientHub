@@ -39,6 +39,20 @@
 
 @else
 
+    @if($allProjects->count() > 1)
+        <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+            @foreach($allProjects as $p)
+                <a
+                    href="{{ route('dashboard.project', $p) }}"
+                    class="btn btn-small"
+                    style="{{ $p->id === $project->id ? 'background: var(--primary); color: white; border-color: var(--primary);' : '' }}"
+                >
+                    {{ $p->name }}
+                </a>
+            @endforeach
+        </div>
+    @endif
+
 {{-- Current Project --}}
 <x-card class="current-project-card">
 

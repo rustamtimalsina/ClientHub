@@ -2,20 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(?Project $project = null)
     {
         $user = Auth::user();
 
-        // NEW: also load the project's milestones, files, and invoices
-        // in one go, instead of just the bare project.
-        $project = $user?->projects()
-            ->with(['milestones', 'files', 'invoices'])
-            ->first();
+        $allProjects = $user?->projects()->latest()->get() ?? collect();
 
-        return view('dashboard', compact('project'));
+        if ($project) {
+            // Security check: make sure this project actually belongs to the logged-in client
+            abort_unless($project->client_id === $user->id, 403);
+        } else {
+            $project = $allProjects->first();
+        }
+
+        if ($project) {
+            $project->load(['milestones', 'files', 'invoices']);
+        }
+
+        return view('dashboard', [
+            'project' => $project,
+            'allProjects' => $allProjects,
+        ]);
     }
 }
