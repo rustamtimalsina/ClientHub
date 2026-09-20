@@ -9,11 +9,21 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function index()
+      public function index(Request $request)
     {
-        $projects = Project::with('client')->latest()->get();
+        $search = $request->query('search');
 
-        return view('admin.projects', compact('projects'));
+        $projects = Project::with('client')
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhereHas('client', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%");
+                    });
+            })
+            ->latest()
+            ->get();
+
+        return view('admin.projects', compact('projects', 'search'));
     }
 
     public function create()

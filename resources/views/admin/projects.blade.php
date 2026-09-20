@@ -2,7 +2,7 @@
 
     <div class="dashboard">
 
-        <div class="dashboard-welcome">
+              <div class="dashboard-welcome">
             <div>
                 <p class="dashboard-eyebrow">Admin</p>
                 <h1>All Projects</h1>
@@ -10,6 +10,20 @@
             </div>
             <a href="{{ route('admin.projects.create') }}" class="btn btn-success">+ New Project</a>
         </div>
+
+        <form method="GET" action="{{ route('admin.projects.index') }}" style="margin-bottom: 20px; display: flex; gap: 10px;">
+            <input
+                type="text"
+                name="search"
+                value="{{ $search }}"
+                placeholder="Search by project or client name..."
+                style="flex: 1; max-width: 400px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border);"
+            >
+            <button type="submit" class="btn">Search</button>
+            @if($search)
+                <a href="{{ route('admin.projects.index') }}" class="btn">Clear</a>
+            @endif
+        </form>
 
         <x-card>
 
