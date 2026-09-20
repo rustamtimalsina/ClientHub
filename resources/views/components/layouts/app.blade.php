@@ -7,12 +7,12 @@
 
     <style>
         :root {
-            --bg: #f5f6f8;
+            --bg: #f6f7fb;
             --surface: #ffffff;
-            --text: #1f2937;
+            --text: #1e1b4b;
             --muted: #6b7280;
-            --border: #e5e7eb;
-            --primary: #1f2937;
+            --border: #e4e4f0;
+            --primary: #4f46e5;
             --success-bg: #dcfce7;
             --success-text: #166534;
             --warning-bg: #fef3c7;
@@ -25,33 +25,37 @@
 
         * { box-sizing: border-box; }
 body {
-    font-family: Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     margin: 0;
-    background: #f3f4f6;
+    background: var(--bg);
     color: var(--text);
 }
 
-       .navbar {
+              .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #111827;
-    color: white;
+    background: #ffffff;
+    color: var(--text);
     padding: 18px 40px;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 2px rgba(79, 70, 229, 0.04);
 }
 
         .navbar h2 {
             margin: 0;
             font-size: 20px;
+            color: var(--primary);
+            font-weight: 800;
         }
 
         .logout-button {
             display: inline-block;
             padding: 8px 16px;
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            border-radius: 6px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
             background: transparent;
-            color: white;
+            color: var(--text);
             font-size: 14px;
             font-weight: 600;
             text-decoration: none;
@@ -60,8 +64,8 @@ body {
         }
 
         .logout-button:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.55);
+            background: #eef2ff;
+            border-color: #c7d2fe;
         }
 .container {
     width: 100%;
@@ -70,12 +74,13 @@ body {
     padding: 40px 28px 60px;
 }
 
-        .card {
+                .card {
             background: var(--surface);
-            padding: 25px;
+            padding: 26px;
             margin-bottom: 20px;
-            border-radius: 10px;
+            border-radius: 16px;
             border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.06);
         }
 
         .card h2,
@@ -189,9 +194,9 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 8px;
-        background: var(--neutral-bg);
-        color: var(--neutral-text);
+        border-radius: 10px;
+        background: #eef2ff;
+        color: var(--primary);
         font-size: 9px;
         font-weight: 700;
         letter-spacing: 0.04em;
@@ -221,18 +226,19 @@ body {
         flex-shrink: 0;
         padding: 8px 14px;
         border: 1px solid var(--border);
-        border-radius: 7px;
+        border-radius: 10px;
         background: white;
         color: var(--text);
         font-size: 13px;
         font-weight: 600;
         text-decoration: none;
         cursor: pointer;
-        transition: background 0.15s ease, border-color 0.15s ease;
+        transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
     }
 
     .btn:hover {
         background: #f3f4f6;
+        transform: translateY(-1px);
     }
 
     .btn-small {
@@ -261,16 +267,18 @@ body {
         gap: 12px;
     }
 
-    .milestone-card {
+        .milestone-card {
         border: 1px solid var(--border-color, #e5e7eb);
-        border-radius: 12px;
+        border-radius: 14px;
         background: var(--card-background, #fff);
         overflow: hidden;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
 
     .milestone-card:hover {
-        border-color: #cbd5e1;
+        border-color: #c7d2fe;
+        box-shadow: 0 4px 14px rgba(79, 70, 229, 0.08);
+        transform: translateY(-1px);
     }
 
     .milestone-card[open] {
@@ -712,12 +720,12 @@ body {
         background: #e5e7eb;
     }
 
-    .progress-bar-fill {
+        .progress-bar-fill {
         height: 100%;
 
         border-radius: inherit;
 
-        background: #2563eb;
+        background: var(--primary);
 
         transition: width 0.3s ease;
     }
@@ -840,7 +848,7 @@ body {
 }
 
 .progress-bar-fill {
-    background: #2563eb;
+    background: var(--primary);
 }
 .dashboard-grid {
     display: grid;

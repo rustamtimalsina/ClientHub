@@ -6,13 +6,13 @@
     <title>Reset Password — ClientHub</title>
 
     <style>
-        :root {
-            --bg: #f5f6f8;
+                :root {
+            --bg: #f6f7fb;
             --surface: #ffffff;
-            --text: #1f2937;
+            --text: #1e1b4b;
             --muted: #6b7280;
-            --border: #e5e7eb;
-            --primary: #1f2937;
+            --border: #e4e4f0;
+            --primary: #4f46e5;
             --danger-bg: #fee2e2;
             --danger-text: #991b1b;
         }
