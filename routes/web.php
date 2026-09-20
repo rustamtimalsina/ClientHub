@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Admin\ProjectFileController as AdminFileController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\AccountController;
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -39,6 +40,13 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 Route::get('/dashboard/{project}', [DashboardController::class, 'index'])
     ->middleware('auth')
     ->name('dashboard.project');
+    Route::get('/account', [AccountController::class, 'edit'])
+    ->middleware('auth')
+    ->name('account.edit');
+
+Route::put('/account', [AccountController::class, 'update'])
+    ->middleware('auth')
+    ->name('account.update');
 
 Route::post('/logout', [LoginController::class, 'logout'])
     ->middleware('auth')

@@ -960,7 +960,10 @@ body {
     <nav class="navbar">
     <h2>ClientHub</h2>
     <div style="display: flex; align-items: center; gap: 12px;">
-       @if(auth()->user()?->role === 'admin')
+            <a href="{{ route('account.edit') }}" class="logout-button" style="text-decoration: none;">
+            Account
+        </a>   
+    @if(auth()->user()?->role === 'admin')
     <a href="{{ route('admin.dashboard') }}" class="logout-button" style="text-decoration: none;">
         Overview
     </a>
