@@ -961,6 +961,9 @@ body {
     <h2>ClientHub</h2>
     <div style="display: flex; align-items: center; gap: 12px;">
        @if(auth()->user()?->role === 'admin')
+    <a href="{{ route('admin.dashboard') }}" class="logout-button" style="text-decoration: none;">
+        Overview
+    </a>
     <a href="{{ route('admin.projects.index') }}" class="logout-button" style="text-decoration: none;">
         Projects
     </a>

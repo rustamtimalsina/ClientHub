@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\InvoiceController as AdminInvoiceController;
 use App\Http\Controllers\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Admin\ProjectFileController as AdminFileController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -56,6 +57,7 @@ Route::get('/invoices/{invoice}/download', [InvoiceController::class, 'download'
     ->name('invoices.download');
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/projects', [AdminProjectController::class, 'index'])->name('admin.projects.index');
 Route::get('/projects/create', [AdminProjectController::class, 'create'])->name('admin.projects.create');
 Route::post('/projects', [AdminProjectController::class, 'store'])->name('admin.projects.store');
