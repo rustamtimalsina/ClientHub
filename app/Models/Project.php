@@ -4,10 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Project extends Model
 {
     use HasFactory;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($project) {
+            foreach ($project->files as $file) {
+                Storage::disk('public')->delete($file->file_path);
+            }
+        });
+    }
     protected $fillable = [
         'id',
         'client_id',
