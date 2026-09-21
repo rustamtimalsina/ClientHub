@@ -957,8 +957,10 @@ body {
     </style>
 </head>
 <body>
-    <nav class="navbar">
-    <h2>ClientHub</h2>
+   <nav class="navbar">
+    <a href="{{ auth()->user()?->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}" style="text-decoration: none; color: inherit;">
+        <h2>ClientHub</h2>
+    </a>
     <div style="display: flex; align-items: center; gap: 12px;">
             <a href="{{ route('account.edit') }}" class="logout-button" style="text-decoration: none;">
             Account
