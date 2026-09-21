@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -19,13 +21,26 @@ class LoginController extends Controller
     /**
      * Authenticate user.
      */
-    public function login(Request $request)
+       public function login(Request $request)
     {
         // Validate login form
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+
+        $throttleKey = Str::lower($credentials['email']) . '|' . $request->ip();
+
+        // Block after 5 failed attempts, for 60 seconds
+        if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
+            $seconds = RateLimiter::availableIn($throttleKey);
+
+            return back()
+                ->withErrors([
+                    'email' => "Too many login attempts. Please try again in {$seconds} seconds.",
+                ])
+                ->onlyInput('email');
+        }
 
         /*
          * Check credentials against the users table.
@@ -37,6 +52,7 @@ class LoginController extends Controller
             $credentials,
             $request->boolean('remember')
         )) {
+            RateLimiter::clear($throttleKey);
 
             /*
              * Generate a new session ID after
@@ -51,6 +67,8 @@ class LoginController extends Controller
                 ->route('dashboard')
                 ->with('success', 'Welcome back to ClientHub.');
         }
+
+        RateLimiter::hit($throttleKey, 60);
 
         // Login failed
         return back()
