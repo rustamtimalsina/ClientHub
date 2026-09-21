@@ -38,4 +38,19 @@ class ClientController extends Controller
         return redirect()->route('admin.clients.create')
             ->with('success', 'Client account created successfully.');
     }
+        public function destroy(User $client)
+    {
+        abort_if($client->role !== 'client', 404);
+
+        if ($client->projects()->exists()) {
+            return back()->withErrors([
+                'client' => "Cannot delete {$client->name} — they still have projects assigned. Delete or reassign their projects first.",
+            ]);
+        }
+
+        $client->delete();
+
+        return redirect()->route('admin.clients.create')
+            ->with('success', 'Client account deleted successfully.');
+    }
     }

@@ -48,7 +48,7 @@
 
         </x-card>
 
-        <x-card title="Existing Clients">
+               <x-card title="Existing Clients">
 
             @if($clients->isEmpty())
                 <x-empty-state
@@ -63,6 +63,14 @@
                                 <strong>{{ $client->name }}</strong>
                                 <span>{{ $client->email }}</span>
                             </div>
+
+                            <form method="POST" action="{{ route('admin.clients.destroy', $client) }}" onsubmit="return confirm('Delete {{ $client->name }}? This cannot be undone.');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-small" style="background: #dc2626; color: white; border: none;">
+                                    Delete
+                                </button>
+                            </form>
                         </div>
                     @endforeach
                 </div>
