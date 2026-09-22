@@ -21,7 +21,7 @@ class InvoiceController extends Controller
     public function store(Request $request, Project $project)
     {
         $validated = $request->validate([
-            'invoice_number' => 'required|string|max:255',
+            'invoice_number' => 'required|string|max:255|unique:invoices,invoice_number',
             'status' => 'required|in:pending,paid,overdue',
             'amount' => 'required|numeric|min:0',
             'issued_at' => 'nullable|date',
@@ -39,7 +39,7 @@ class InvoiceController extends Controller
     public function update(Request $request, Project $project, Invoice $invoice)
     {
         $validated = $request->validate([
-            'invoice_number' => 'required|string|max:255',
+            'invoice_number' => 'required|string|max:255|unique:invoices,invoice_number,' . $invoice->id,
             'status' => 'required|in:pending,paid,overdue',
             'amount' => 'required|numeric|min:0',
             'issued_at' => 'nullable|date',
