@@ -7,7 +7,7 @@
         'overdue' => 'Overdue',
     ];
 
-    $label = $labels[$status] ?? ucfirst(str_replace('_', ' ', $status));
+    $label = $label ?? ($labels[$status] ?? ucfirst(str_replace('_', ' ', $status)));
 
     // NEW: pick a color group per status
     $classes = [

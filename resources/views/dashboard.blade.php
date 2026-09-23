@@ -10,6 +10,11 @@
     $progress = $totalMilestones > 0
         ? (int) round(($completedMilestones / $totalMilestones) * 100)
         : 0;
+
+    $daysRemaining = null;
+    if ($project?->due_date) {
+        $daysRemaining = now()->startOfDay()->diffInDays($project->due_date->startOfDay(), false);
+    }
 @endphp
 
 
@@ -122,6 +127,16 @@
             <strong>
                 {{ $project->due_date?->format('M d, Y') ?? 'Not set' }}
             </strong>
+
+            @if($daysRemaining !== null)
+                @if($daysRemaining > 0)
+                    <div style="margin-top: 4px;"><x-status-badge status="pending" :label="$daysRemaining . ' day' . ($daysRemaining === 1 ? '' : 's') . ' left'" /></div>
+                @elseif($daysRemaining === 0)
+                    <div style="margin-top: 4px;"><x-status-badge status="in_progress" label="Due today" /></div>
+                @else
+                    <div style="margin-top: 4px;"><x-status-badge status="overdue" :label="'Overdue by ' . abs($daysRemaining) . ' day' . (abs($daysRemaining) === 1 ? '' : 's')" /></div>
+                @endif
+            @endif
 
         </div>
 
