@@ -74,6 +74,8 @@ php artisan serve
 ```
 Visit `http://127.0.0.1:8000`.
 
+**Windows shortcut:** double-click `start-server.bat` in the project root to start the server without typing any commands.
+
 ### Note on emails
 By default, `MAIL_MAILER` is set to `log` in `.env` — emails are written to `storage/logs/laravel.log` instead of actually being sent, which is fine for local development and testing. Switch to a real mail driver (like Mailtrap or SMTP) before using this in production.
 

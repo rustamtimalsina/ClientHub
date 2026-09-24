@@ -93,6 +93,50 @@ body {
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
+                      .card {
+            background: var(--surface);
+            padding: 26px;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.06);
+        }
+
+        .card h2,
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            border-radius: 10px !important;
+            border: 1px solid var(--border) !important;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
 
         @media (max-width: 640px) {
             .grid {

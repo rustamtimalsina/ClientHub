@@ -39,27 +39,36 @@
 
         </div>
 
-        {{-- Project Status Breakdown --}}
+               {{-- Project Status Breakdown --}}
         <x-card title="Projects by Status">
-            <div style="display: flex; gap: 30px; flex-wrap: wrap;">
-                <div>
-                    <x-status-badge status="pending" />
-                    <strong style="margin-left: 8px;">{{ $stats['pending_projects'] }}</strong>
-                </div>
-                <div>
-                    <x-status-badge status="in_progress" />
-                    <strong style="margin-left: 8px;">{{ $stats['in_progress_projects'] }}</strong>
-                </div>
-                <div>
-                    <x-status-badge status="completed" />
-                    <strong style="margin-left: 8px;">{{ $stats['completed_projects'] }}</strong>
-                </div>
-                @if($stats['overdue_invoices'] > 0)
+            <div style="display: flex; gap: 40px; flex-wrap: wrap; align-items: center;">
+                <div style="display: flex; flex-direction: column; gap: 14px;">
                     <div>
-                        <x-status-badge status="overdue" />
-                        <strong style="margin-left: 8px;">{{ $stats['overdue_invoices'] }} invoice(s)</strong>
+                        <x-status-badge status="pending" />
+                        <strong style="margin-left: 8px;">{{ $stats['pending_projects'] }}</strong>
                     </div>
-                @endif
+                    <div>
+                        <x-status-badge status="in_progress" />
+                        <strong style="margin-left: 8px;">{{ $stats['in_progress_projects'] }}</strong>
+                    </div>
+                    <div>
+                        <x-status-badge status="completed" />
+                        <strong style="margin-left: 8px;">{{ $stats['completed_projects'] }}</strong>
+                    </div>
+                    @if($stats['overdue_invoices'] > 0)
+                        <div>
+                            <x-status-badge status="overdue" />
+                            <strong style="margin-left: 8px;">{{ $stats['overdue_invoices'] }} invoice(s)</strong>
+                        </div>
+                    @endif
+                </div>
+
+                              <div style="width: 260px; height: 260px; position: relative;">
+                    <canvas id="statusChart"></canvas>
+                    <div id="chartCenterLabel" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none;">
+                                            <div style="font-size: 28px; font-weight: 800; color: var(--text); line-height: 1;">{{ $stats['total_projects'] }}</div>
+                        <div style="font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px;">Total</div> </div>
+                </div>
             </div>
         </x-card>
 
@@ -90,7 +99,61 @@
         <div style="margin-top: 10px;">
             <a href="{{ route('admin.projects.index') }}" class="btn">View All Projects →</a>
         </div>
-
     </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <script>
+        const statusTotal = {{ $stats['pending_projects'] + $stats['in_progress_projects'] + $stats['completed_projects'] }};
+
+        new Chart(document.getElementById('statusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Pending', 'In Progress', 'Completed'],
+                datasets: [{
+                    data: [
+                        {{ $stats['pending_projects'] }},
+                        {{ $stats['in_progress_projects'] }},
+                        {{ $stats['completed_projects'] }}
+                    ],
+                    backgroundColor: ['#c7d2fe', '#4f46e5', '#16a34a'],
+                    borderColor: '#ffffff',
+                    borderWidth: 3,
+                    hoverOffset: 10,
+                }]
+            },
+            options: {
+                cutout: '80%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 16,
+                            font: { size: 13, weight: '600' },
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                const percent = statusTotal > 0 ? Math.round((value / statusTotal) * 100) : 0;
+                                return ` ${context.label}: ${value} (${percent}%)`;
+                            }
+                        },
+                        backgroundColor: '#1e1b4b',
+                        padding: 12,
+                        titleFont: { size: 13 },
+                        bodyFont: { size: 13 },
+                        cornerRadius: 8,
+                    }
+                },
+                animation: {
+                    animateRotate: true,
+                    animateScale: true,
+                }
+            }
+        });
+    </script>
 
 </x-layouts.app>
