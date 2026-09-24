@@ -77,7 +77,15 @@ Visit `http://127.0.0.1:8000`.
 **Windows shortcut:** double-click `start-server.bat` in the project root to start the server without typing any commands.
 
 ### Note on emails
-By default, `MAIL_MAILER` is set to `log` in `.env` — emails are written to `storage/logs/laravel.log` instead of actually being sent, which is fine for local development and testing. Switch to a real mail driver (like Mailtrap or SMTP) before using this in production.
+By default, `MAIL_MAILER` is set to `log` in `.env.example` — emails are written to `storage/logs/laravel.log` instead of actually being sent, which is fine for local development and testing.
+
+To send real emails (recommended once you're testing with real users), use Gmail SMTP:
+1. Create a Gmail account for sending (e.g. `hello.yourapp@gmail.com`)
+2. Enable 2-Step Verification on that account
+3. Generate an [App Password](https://myaccount.google.com/apppasswords)
+4. Set these in your `.env`:
+
+**Never commit real credentials.** `.env` is already git-ignored — keep it that way.
 
 ## Running Tests
 ```bash
