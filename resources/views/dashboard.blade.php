@@ -246,7 +246,7 @@
                                 </summary>
 
 
-                                {{-- Expanded Details --}}
+                                                               {{-- Expanded Details --}}
                                 <div class="milestone-card-details">
 
                                     @if($milestone->completed_at)
@@ -264,6 +264,34 @@
                                         </div>
 
                                     @endif
+
+                                    <div style="margin-top: 16px; border-top: 1px solid var(--border); padding-top: 16px;">
+
+                                        <span class="detail-label">Comments</span>
+
+                                        @forelse($milestone->comments as $comment)
+                                            <div style="margin-top: 10px; background: #f6f7fb; border-radius: 10px; padding: 10px 14px;">
+                                                <div style="font-size: 12px; font-weight: bold; color: var(--primary);">
+                                                    {{ $comment->user->name }}
+                                                    <span style="font-weight: normal; color: var(--muted);">
+                                                        &middot; {{ $comment->created_at->diffForHumans() }}
+                                                    </span>
+                                                </div>
+                                                <div style="font-size: 13px; margin-top: 4px;">
+                                                    {{ $comment->body }}
+                                                </div>
+                                            </div>
+                                        @empty
+                                            <p style="font-size: 13px; color: var(--muted); margin-top: 6px;">No comments yet.</p>
+                                        @endforelse
+
+                                        <form method="POST" action="{{ route('comments.store', $milestone) }}" style="margin-top: 12px;">
+                                            @csrf
+                                            <textarea name="body" rows="2" placeholder="Write a comment..." required style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border);"></textarea>
+                                            <button type="submit" class="btn btn-small" style="margin-top: 6px;">Post Comment</button>
+                                        </form>
+
+                                    </div>
 
                                 </div>
 

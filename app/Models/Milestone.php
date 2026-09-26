@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Milestone extends Model
 {
     use HasFactory;
+     public function comments()
+    {
+        return $this->hasMany(Comment::class)->latest();
+    }
     protected $fillable = [
         'milestones',
         'id',

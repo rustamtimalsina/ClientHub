@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Admin\ProjectFileController as AdminFileController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CommentController;
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -63,6 +64,9 @@ Route::get('/files/{projectFile}/download', [ProjectFileController::class, 'down
 Route::get('/invoices/{invoice}/download', [InvoiceController::class, 'download'])
     ->middleware('auth')
     ->name('invoices.download');
+    Route::post('/milestones/{milestone}/comments', [CommentController::class, 'store'])
+    ->middleware('auth')
+    ->name('comments.store');
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
