@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProjectFileController as AdminFileController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PaymentController;
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -67,6 +68,12 @@ Route::get('/invoices/{invoice}/download', [InvoiceController::class, 'download'
     Route::post('/milestones/{milestone}/comments', [CommentController::class, 'store'])
     ->middleware('auth')
     ->name('comments.store');
+    Route::get('/invoices/{invoice}/pay', [PaymentController::class, 'pay'])
+    ->middleware('auth')
+    ->name('payment.pay');
+
+Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+Route::get('/payment/failure', [PaymentController::class, 'failure'])->name('payment.failure');
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');

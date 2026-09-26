@@ -33,8 +33,19 @@
     </div>
 </div>
 
-@if(!$project)
+@if(session('success'))
+    <x-card>
+        <p style="color: #16a34a; font-weight: bold;">{{ session('success') }}</p>
+    </x-card>
+@endif
 
+@if(session('error'))
+    <x-card>
+        <p style="color: #dc2626; font-weight: bold;">{{ session('error') }}</p>
+    </x-card>
+@endif
+
+@if(!$project)
     <x-card>
         <x-empty-state
             title="No project yet"
@@ -432,15 +443,23 @@
                     </div>
 
 
-                    <div class="invoice-card-actions">
+                                      <div class="invoice-card-actions" style="display: flex; gap: 10px;">
+                                  <a
+                        
+                            href="{{ route('invoices.download', $invoice) }}"
+                            class="download-invoice-button"
+                        >
+                            Download Invoice
+                        </a>
 
-                        <a
-                           
-    href="{{ route('invoices.download', $invoice) }}"
-    class="download-invoice-button"
->
-    Download Invoice
-</a>
+                        @if($invoice->status !== 'paid')
+                              <a
+                                href="{{ route('payment.pay', $invoice) }}"
+                                class="btn btn-success"
+                            >
+                                Pay Now
+                            </a>
+                        @endif
 
                     </div>
 
