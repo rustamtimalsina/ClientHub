@@ -7,12 +7,15 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index(?Project $project = null)
+       public function index(?Project $project = null)
     {
         $user = Auth::user();
 
-        $allProjects = $user?->projects()->latest()->get() ?? collect();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
 
+        $allProjects = $user?->projects()->latest()->get() ?? collect();
         if ($project) {
             // Security check: make sure this project actually belongs to the logged-in client
             abort_unless($project->client_id === $user->id, 403);
