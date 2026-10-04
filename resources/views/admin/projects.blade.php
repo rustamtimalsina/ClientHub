@@ -28,11 +28,18 @@
         <x-card>
 
             @if($projects->isEmpty())
-                <x-empty-state
-                    title="No projects yet"
-                    message="Create your first project to get started."
-                />
-            @else
+    @if($search)
+        <x-empty-state
+            title="No matches found"
+            message="No projects or clients matched '{{ $search }}'. Try a different search."
+        />
+    @else
+        <x-empty-state
+            title="No projects yet"
+            message="Create your first project to get started."
+        />
+    @endif
+@else
                 <div class="file-list">
                     @foreach($projects as $project)
                         <div class="file-item">

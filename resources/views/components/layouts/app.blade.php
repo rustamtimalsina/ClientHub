@@ -396,6 +396,41 @@
             background: #f8fafc;
         }
 
+.empty-state {
+    text-align: center;
+    padding: 36px 20px;
+}
+
+.empty-state-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #f1f0fb;
+    color: #4f46e5;
+    margin-bottom: 14px;
+}
+
+.empty-state-title {
+    font-family: Georgia, serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e1b4b;
+    margin: 0 0 4px;
+}
+
+.empty-state-message {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
         .milestone-detail { display: flex; flex-direction: column; gap: 4px; }
         .milestone-detail .detail-label { font-size: 0.8rem; text-transform: none; letter-spacing: 0; color: var(--muted); }
         .milestone-detail strong { font-size: 0.875rem; color: #334155; }
