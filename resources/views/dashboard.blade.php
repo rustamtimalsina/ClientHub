@@ -32,17 +32,6 @@
             </div>
         </div>
 
-        @if(session('success'))
-            <x-card>
-                <p style="color: #16a34a; font-weight: bold;">{{ session('success') }}</p>
-            </x-card>
-        @endif
-
-        @if(session('error'))
-            <x-card>
-                <p style="color: #dc2626; font-weight: bold;">{{ session('error') }}</p>
-            </x-card>
-        @endif
 
         @if(!$project)
             <x-card>

@@ -262,6 +262,46 @@
         .plain-list { list-style: none; margin: 0; padding: 0; }
         .plain-list li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
         .plain-list li:last-child { border-bottom: none; }
+        .toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 999;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    animation: toast-in 0.3s ease;
+    max-width: 320px;
+}
+
+.toast-success { background: #15803d; }
+.toast-error { background: #b91c1c; }
+
+.toast.toast-hide {
+    animation: toast-out 0.3s ease forwards;
+}
+
+@keyframes toast-in {
+    from { transform: translateX(40px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes toast-out {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(40px); opacity: 0; }
+}
+
+@media (max-width: 850px) {
+    .toast {
+        left: 14px;
+        right: 14px;
+        top: 14px;
+        max-width: none;
+    }
+}
 
         .badge {
             display: inline-block;
@@ -589,6 +629,17 @@
     @endphp
 
     <div class="app-shell">
+        @if(session('success'))
+    <div class="toast toast-success">{{ session('success') }}</div>
+@endif
+
+@if(session('error'))
+    <div class="toast toast-error">{{ session('error') }}</div>
+@endif
+
+@if($errors->any())
+    <div class="toast toast-error">{{ $errors->first() }}</div>
+@endif
 
         <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
@@ -680,31 +731,41 @@
         </div>
 
     </div>
+<script>
+    (function () {
+        var sidebar = document.getElementById('sidebar');
+        var backdrop = document.getElementById('sidebarBackdrop');
+        var button = document.getElementById('mobileMenuButton');
 
-    <script>
-        (function () {
-            var sidebar = document.getElementById('sidebar');
-            var backdrop = document.getElementById('sidebarBackdrop');
-            var button = document.getElementById('mobileMenuButton');
+        function openMenu() {
+            sidebar.classList.add('is-open');
+            backdrop.classList.add('is-visible');
+        }
 
-            function openMenu() {
-                sidebar.classList.add('is-open');
-                backdrop.classList.add('is-visible');
-            }
+        function closeMenu() {
+            sidebar.classList.remove('is-open');
+            backdrop.classList.remove('is-visible');
+        }
 
-            function closeMenu() {
-                sidebar.classList.remove('is-open');
-                backdrop.classList.remove('is-visible');
-            }
+        if (button) {
+            button.addEventListener('click', openMenu);
+        }
+        if (backdrop) {
+            backdrop.addEventListener('click', closeMenu);
+        }
 
-            if (button) {
-                button.addEventListener('click', openMenu);
-            }
-            if (backdrop) {
-                backdrop.addEventListener('click', closeMenu);
-            }
-        })();
-    </script>
+        document.querySelectorAll('.toast').forEach(function (toast, i) {
+            setTimeout(function () {
+                toast.classList.add('toast-hide');
+            }, 3500 + i * 300);
+
+            setTimeout(function () {
+                toast.remove();
+            }, 3900 + i * 300);
+        });
+    })();
+</script>
+    
 
 </body>
 </html>

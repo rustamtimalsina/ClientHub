@@ -10,12 +10,6 @@
             </div>
         </div>
 
-        @if(session('success'))
-            <x-card>
-                <p style="color: #16a34a; font-weight: bold;">{{ session('success') }}</p>
-            </x-card>
-        @endif
-
         <x-card title="Add Milestone">
 
             <form method="POST" action="{{ route('admin.milestones.store', $project) }}">

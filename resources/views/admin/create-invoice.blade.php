@@ -10,18 +10,6 @@
             </div>
         </div>
 
-             @if(session('success'))
-            <x-card>
-                <p style="color: #16a34a; font-weight: bold;">{{ session('success') }}</p>
-            </x-card>
-        @endif
-
-        @if($errors->any())
-            <x-card>
-                <p style="color: #dc2626; font-weight: bold;">{{ $errors->first() }}</p>
-            </x-card>
-        @endif
-
         <x-card title="Add Invoice">
 
             <form method="POST" action="{{ route('admin.invoices.store', $project) }}">
