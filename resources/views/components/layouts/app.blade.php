@@ -541,7 +541,10 @@
         .client-invoice-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
         .download-invoice-button { background: #111827; color: #ffffff; padding: 9px 15px; border-radius: 8px; font-size: 13px; }
         .download-invoice-button:hover { background: #2563eb; }
-
+.invoice-edit-row {
+    display: flex;
+    gap: 10px;
+}
         @media (max-width: 850px) {
             .container { padding: 20px 14px 40px; }
             .grid { grid-template-columns: 1fr !important; }
@@ -563,6 +566,13 @@
             .milestone-card-header { flex-direction: column; align-items: stretch; }
             .milestone-main { width: 100%; }
             .milestone-title { flex-wrap: wrap; width: 100%; }
+            .invoice-edit-row {
+    flex-direction: column;
+}
+
+.invoice-status-select {
+    width: 100%;
+}
             .milestone-actions { width: 100%; justify-content: space-between; margin-top: 10px; }
             .milestone-card-details { flex-direction: column; align-items: flex-start; gap: 16px; }
             .milestone-review { margin-left: 0; }

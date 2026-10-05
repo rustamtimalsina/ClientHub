@@ -82,20 +82,20 @@
                                     <input type="text" name="invoice_number" required value="{{ $invoice->invoice_number }}" style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border); font-weight:bold;">
                                 </div>
 
-                                <div style="display:flex; gap:10px; margin-bottom: 10px;">
-                                    <input type="number" step="0.01" name="amount" required value="{{ $invoice->amount }}" style="flex:1; padding:8px; border-radius:6px; border:1px solid var(--border);">
+                                <div class="invoice-edit-row" style="margin-bottom: 10px;">
+    <input type="number" step="0.01" name="amount" required value="{{ $invoice->amount }}" style="flex:1; padding:8px; border-radius:6px; border:1px solid var(--border);">
 
-                                    <select name="status" required style="padding:8px; border-radius:6px; border:1px solid var(--border);">
-                                        <option value="pending" @selected($invoice->status === 'pending')>Pending</option>
+    <select name="status" required class="invoice-status-select" style="padding:8px; border-radius:6px; border:1px solid var(--border);">
+        <option value="pending" @selected($invoice->status === 'pending')>Pending</option>
                                         <option value="paid" @selected($invoice->status === 'paid')>Paid</option>
                                         <option value="overdue" @selected($invoice->status === 'overdue')>Overdue</option>
                                     </select>
                                 </div>
 
-                                <div style="display:flex; gap:10px; margin-bottom: 10px;">
-                                    <input type="date" name="issued_at" value="{{ $invoice->issued_at?->format('Y-m-d') }}" style="flex:1; padding:8px; border-radius:6px; border:1px solid var(--border);">
-                                    <input type="date" name="due_date" value="{{ $invoice->due_date?->format('Y-m-d') }}" style="flex:1; padding:8px; border-radius:6px; border:1px solid var(--border);">
-                                </div>
+                                <div class="invoice-edit-row" style="margin-bottom: 10px;">
+    <input type="date" name="issued_at" value="{{ $invoice->issued_at?->format('Y-m-d') }}" style="flex:1; padding:8px; border-radius:6px; border:1px solid var(--border);">
+    <input type="date" name="due_date" value="{{ $invoice->due_date?->format('Y-m-d') }}" style="flex:1; padding:8px; border-radius:6px; border:1px solid var(--border);">
+</div>
 
                                 <button type="submit" class="btn btn-small">Save</button>
                             </form>
