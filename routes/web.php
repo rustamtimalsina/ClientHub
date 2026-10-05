@@ -116,4 +116,6 @@ Route::prefix('admin')->middleware(['auth', 'admin','no-cache'])->group(function
         ->name('admin.clients.resend-invite');
 
     Route::get('/payments', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
+
+Route::get('/activity', [App\Http\Controllers\Admin\ActivityLogController::class, 'index'])->name('admin.activity.index');
 });

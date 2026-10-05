@@ -18,26 +18,28 @@ class InvoiceController extends Controller
         return view('admin.create-invoice', compact('project', 'invoices'));
     }
 
-    public function store(Request $request, Project $project)
-    {
-        $validated = $request->validate([
-            'invoice_number' => 'required|string|max:255|unique:invoices,invoice_number',
-            'status' => 'required|in:pending,paid,overdue',
-            'amount' => 'required|numeric|min:0',
-            'issued_at' => 'nullable|date',
-            'due_date' => 'nullable|date|after_or_equal:issued_at',
-            ], 
-            [
-            'due_date.after_or_equal' => 'Due date cannot be earlier than the issued date.',
-        ]);
+   public function store(Request $request, Project $project)
+{
+    $validated = $request->validate([
+        'invoice_number' => 'required|string|max:255|unique:invoices,invoice_number',
+        'status' => 'required|in:pending,paid,overdue',
+        'amount' => 'required|numeric|min:0',
+        'issued_at' => 'nullable|date',
+        'due_date' => 'nullable|date|after_or_equal:issued_at',
+        ], 
+        [
+        'due_date.after_or_equal' => 'Due date cannot be earlier than the issued date.',
+    ]);
 
-            $invoice = $project->invoices()->create($validated);
+        $invoice = $project->invoices()->create($validated);
 
-        Mail::to($project->client->email)->send(new InvoiceCreatedMail($invoice));
+    \App\Models\ActivityLog::record(auth()->user()->name . ' created invoice "' . $invoice->invoice_number . '" for ' . $project->name);
 
-        return redirect()->route('admin.invoices.create', $project)
-            ->with('success', 'Invoice added successfully.');
-    }
+    Mail::to($project->client->email)->send(new InvoiceCreatedMail($invoice));
+
+    return redirect()->route('admin.invoices.create', $project)
+        ->with('success', 'Invoice added successfully.');
+}
 
     public function update(Request $request, Project $project, Invoice $invoice)
     {

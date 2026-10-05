@@ -34,25 +34,26 @@ class ProjectController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'client_id' => 'required|exists:users,id',
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'status' => 'required|in:pending,in_progress,completed',
-            'start_date' => 'nullable|date',
-            'due_date' => 'nullable|date|after_or_equal:start_date',
-            ], 
-            [
-                'due_date.after_or_equal' => 'Due date cannot be earlier than the start date.',
-        ]);
+   {
+    $validated = $request->validate([
+        'client_id' => 'required|exists:users,id',
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'status' => 'required|in:pending,in_progress,completed',
+        'start_date' => 'nullable|date',
+        'due_date' => 'nullable|date|after_or_equal:start_date',
+        ], 
+        [
+            'due_date.after_or_equal' => 'Due date cannot be earlier than the start date.',
+    ]);
 
-        Project::create($validated);
+    $project = Project::create($validated);
 
-        return redirect()->route('admin.projects.create')
-            ->with('success', 'Project created successfully.');
-    }
+    \App\Models\ActivityLog::record(auth()->user()->name . ' created project "' . $project->name . '"');
 
+    return redirect()->route('admin.projects.create')
+        ->with('success', 'Project created successfully.');
+}
     public function edit(Project $project)
     {
         $clients = User::where('role', 'client')->get();

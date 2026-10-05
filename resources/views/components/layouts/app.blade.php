@@ -240,6 +240,50 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
+        .activity-timeline {
+    position: relative;
+    padding-left: 6px;
+}
+
+.activity-item {
+    display: flex;
+    gap: 14px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.activity-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 16px;
+    bottom: -4px;
+    width: 1px;
+    background: var(--border, #e4e4f0);
+}
+
+.activity-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #1e1b4b;
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.activity-content { min-width: 0; }
+
+.activity-description {
+    margin: 0 0 4px;
+    font-size: 14px;
+    color: #1e1b4b;
+    font-weight: 500;
+}
+
+.activity-time {
+    font-size: 12px;
+    color: var(--muted, #6b7280);
+}
 
         input[type="text"], input[type="email"], input[type="password"],
         input[type="number"], input[type="date"], select, textarea {
@@ -690,6 +734,9 @@
                     <a href="{{ route('admin.payments.index') }}" class="sidebar-link {{ request()->routeIs('admin.payments.*') ? 'active' : '' }}">
                         Payments
                     </a>
+                 <a href="{{ route('admin.activity.index') }}" class="sidebar-link {{ request()->routeIs('admin.activity.*') ? 'active' : '' }}">
+    Activity Log
+</a>   
                 @endif
 
                 <div class="sidebar-section-label">Account</div>
