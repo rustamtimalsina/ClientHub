@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found — ClientHub</title>
+    <title>Access Denied — ClientHub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -57,7 +57,7 @@
             font-family: 'Fraunces', serif;
             font-size: 56px;
             font-weight: 600;
-            color: var(--primary);
+            color: #b45309;
             margin: 0 0 8px;
         }
         .error-title {
@@ -87,9 +87,9 @@
             <h2>ClientHub</h2>
         </div>
         <div class="error-card">
-            <p class="error-code">404</p>
-            <h1 class="error-title">Page not found</h1>
-            <p class="error-message">The page you're looking for doesn't exist or may have been moved.</p>
+            <p class="error-code">403</p>
+            <h1 class="error-title">Access denied</h1>
+            <p class="error-message">You don't have permission to view this page.</p>
             <a href="{{ url('/dashboard') }}" class="error-link">Back to Dashboard</a>
         </div>
     </div>
