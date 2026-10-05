@@ -763,6 +763,18 @@
                 toast.remove();
             }, 3900 + i * 300);
         });
+        document.querySelectorAll('form').forEach(function (form) {
+    form.addEventListener('submit', function () {
+        var btn = form.querySelector('button[type="submit"]');
+        if (btn && !btn.disabled) {
+            btn.disabled = true;
+            btn.dataset.originalText = btn.innerHTML;
+            btn.innerHTML = 'Please wait...';
+            btn.style.opacity = '0.7';
+            btn.style.cursor = 'default';
+        }
+    });
+});
     })();
 </script>
     
