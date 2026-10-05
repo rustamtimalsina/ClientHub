@@ -45,14 +45,22 @@
                     @foreach($clients as $client)
                         <div class="file-item">
                             <div>
-                                <strong>{{ $client->name }}</strong>
-                                <span>{{ $client->email }}</span>
-                                @if($client->invitation_token)
-                                    <span style="display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 9999px; background: #fef3c7; color: #b45309; margin-left: 8px;">Pending Setup</span>
-                                @else
-                                    <span style="display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 9999px; background: #dcfce7; color: #15803d; margin-left: 8px;">Active</span>
-                                @endif
-                            </div>
+    <strong>{{ $client->name }}</strong>
+    <span>{{ $client->email }}</span>
+    @if($client->invitation_token)
+        <span style="display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 9999px; background: #fef3c7; color: #b45309; margin-left: 8px;">Pending Setup</span>
+    @else
+        <span style="display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 9999px; background: #dcfce7; color: #15803d; margin-left: 8px;">Active</span>
+    @endif
+
+    <div style="margin-top: 6px; font-size: 13px; color: var(--muted);">
+        @if($client->projects_count > 0)
+            {{ $client->projects_count }} {{ Str::plural('project', $client->projects_count) }} assigned
+        @else
+            No projects assigned yet
+        @endif
+    </div>
+</div>
 
                             <form method="POST" action="{{ route('admin.clients.destroy', $client) }}" onsubmit="return confirm('Delete {{ $client->name }}? This cannot be undone.');">
                                 @csrf
