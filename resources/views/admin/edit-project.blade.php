@@ -10,12 +10,6 @@
             </div>
         </div>
 
-        @if($errors->any())
-            <x-card>
-                <p style="color: #dc2626; font-weight: bold;">{{ $errors->first() }}</p>
-            </x-card>
-        @endif
-
         <x-card>
 
             <form method="POST" action="{{ route('admin.projects.update', $project) }}">
