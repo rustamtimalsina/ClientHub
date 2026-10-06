@@ -13,11 +13,12 @@ class ActivityLog extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function record(string $description): void
-    {
-        static::create([
-            'user_id' => auth()->id(),
-            'description' => $description,
-        ]);
-    }
+public static function record(string $description, ?string $url = null): void
+{
+    static::create([
+        'user_id' => auth()->id(),
+        'description' => $description,
+        'url' => $url,
+    ]);
+}
 }
