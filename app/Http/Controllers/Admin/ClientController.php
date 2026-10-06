@@ -12,9 +12,12 @@ use Illuminate\Support\Str;
 
 class ClientController extends Controller
 {
-   public function create()
-{
-    $clients = User::where('role', 'client')->withCount('projects')->latest()->get();
+  public function create()
+    {
+        $clients = User::where('role', 'client')
+                    ->latest()
+                    ->paginate(10)
+                    ->withQueryString();;
 
     return view('admin.create-client', compact('clients'));
 }
