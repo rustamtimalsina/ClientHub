@@ -244,23 +244,7 @@
     position: relative;
     padding-left: 6px;
 }
-.sidebar-quick-action {
-    display: block;
-    text-align: center;
-    margin: 0 0 18px;
-    padding: 10px 12px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-}
 
-.sidebar-quick-action:hover {
-    background: rgba(255, 255, 255, 0.18);
-}
 .activity-item {
     display: flex;
     gap: 14px;
@@ -300,6 +284,85 @@
     font-size: 12px;
     color: var(--muted, #6b7280);
 }
+.activity-bell-wrapper {
+    position: relative;
+    margin-bottom: 14px;
+}
+
+.activity-bell-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    color: white;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+}
+
+.activity-bell-button:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.activity-badge {
+    margin-left: auto;
+    background: #dc2626;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 9999px;
+}
+
+.activity-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 300px;
+    max-height: 360px;
+    overflow-y: auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    z-index: 200;
+}
+
+.activity-dropdown.is-open { display: block; }
+
+.activity-dropdown-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f5;
+}
+
+.activity-dropdown-item p {
+    margin: 0 0 4px;
+    font-size: 13px;
+    color: #1e1b4b;
+    font-weight: 500;
+}
+
+.activity-dropdown-item span {
+    font-size: 11px;
+    color: #6b7280;
+}
+
+.activity-dropdown-footer {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e1b4b;
+    text-decoration: none;
+}
+
+.activity-dropdown-footer:hover { background: #f6f7fb; }
 
         input[type="text"], input[type="email"], input[type="password"],
         input[type="number"], input[type="date"], select, textarea {
@@ -354,112 +417,330 @@
     to { transform: translateX(40px); opacity: 0; }
 }
 
-.activity-bell-wrapper {
-    position: relative;
+@media (max-width: 850px) {
+    .toast {
+        left: 14px;
+        right: 14px;
+        top: 14px;
+        max-width: none;
+    }
+}
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .badge-success { background: var(--success-bg); color: var(--success-text); }
+        .badge-warning { background: var(--warning-bg); color: var(--warning-text); }
+        .badge-danger { background: var(--danger-bg); color: var(--danger-text); }
+        .badge-neutral { background: var(--neutral-bg); color: var(--neutral-text); }
+
+        .empty-state {
+            color: var(--muted);
+            font-size: 14px;
+            padding: 28px 20px;
+            margin: 0;
+            text-align: center;
+            background: #fafafa;
+            border: 1px dashed var(--border);
+            border-radius: 10px;
+        }
+
+        a { color: var(--primary); }
+
+        .file-list { display: flex; flex-direction: column; gap: 10px; }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: #fafafa;
+            transition: border-color 0.15s ease;
+        }
+        .file-item:hover { border-color: #cbd5e1; }
+
+        .file-info { display: flex; align-items: center; gap: 14px; min-width: 0; }
+
+        .file-icon {
+            flex-shrink: 0;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: #eef2ff;
+            color: var(--primary);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .file-info > div { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+        .file-info strong { font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .file-info span { font-size: 12px; color: var(--muted); }
+
+        .btn {
+            display: inline-block;
+            flex-shrink: 0;
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+        }
+        .btn:hover { background: #f3f4f6; transform: translateY(-1px); }
+        .btn-small { padding: 6px 12px; font-size: 12px; }
+        .btn-success { background: var(--success-bg); color: var(--success-text); border-color: transparent; }
+        .btn-success:hover { background: #bbf7d0; }
+        .btn-success:disabled { opacity: 0.7; cursor: default; }
+
+        .milestone-list { display: flex; flex-direction: column; gap: 12px; }
+
+        .milestone-card {
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 14px;
+            background: var(--card-background, #fff);
+            overflow: hidden;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .milestone-card:hover { border-color: #c7d2fe; box-shadow: 0 4px 14px rgba(79, 70, 229, 0.08); transform: translateY(-1px); }
+        .milestone-card[open] { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); }
+
+        .milestone-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 18px 20px;
+            cursor: pointer;
+            list-style: none;
+        }
+        .milestone-card-header::-webkit-details-marker { display: none; }
+
+        .milestone-main { min-width: 0; flex: 1; }
+        .milestone-title { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+        .milestone-title strong { font-size: 0.95rem; }
+        .milestone-summary { margin: 0; color: #64748b; font-size: 0.875rem; line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .milestone-actions { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+
+        .milestone-chevron {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            font-size: 0.8rem;
+            transition: transform 0.2s ease;
+        }
+        .milestone-card[open] .milestone-chevron { transform: rotate(180deg); }
+
+        .milestone-card-details {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            padding: 16px 20px 18px;
+            border-top: 1px solid var(--border-color, #e5e7eb);
+            background: #f8fafc;
+        }
+
+.empty-state {
+    text-align: center;
+    padding: 36px 20px;
+}
+
+.empty-state-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #f1f0fb;
+    color: #4f46e5;
     margin-bottom: 14px;
 }
 
-.activity-bell-button {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.08);
-    border: none;
-    color: white;
-    padding: 10px 12px;
-    border-radius: 8px;
-    font-size: 13px;
+.empty-state-title {
+    font-family: Georgia, serif;
+    font-size: 15px;
     font-weight: 600;
-    cursor: pointer;
-    position: relative;
-}
-
-.activity-bell-button:hover {
-    background: rgba(255, 255, 255, 0.14);
-}
-
-.activity-badge {
-    margin-left: auto;
-    background: #dc2626;
-    color: white;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 1px 7px;
-    border-radius: 9999px;
-}
-
-.activity-dropdown {
-    display: none;
-    position: fixed;
-    width: 300px;
-    max-height: 360px;
-    overflow-y: auto;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-    z-index: 500;
-}
-
-.activity-dropdown.is-open { display: block; }
-
-.activity-dropdown-item {
-    padding: 12px 16px;
-    border-bottom: 1px solid #f0f0f5;
-}
-
-.activity-dropdown-item p {
+    color: #1e1b4b;
     margin: 0 0 4px;
-    font-size: 13px;
-    color: #1e1b4b;
-    font-weight: 500;
 }
 
-.activity-dropdown-item span {
-    font-size: 11px;
+.empty-state-message {
+    font-size: 13px;
     color: #6b7280;
+    margin: 0;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
 }
 
-.activity-dropdown-footer {
-    display: block;
-    text-align: center;
-    padding: 12px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #1e1b4b;
-    text-decoration: none;
+        .milestone-detail { display: flex; flex-direction: column; gap: 4px; }
+        .milestone-detail .detail-label { font-size: 0.8rem; text-transform: none; letter-spacing: 0; color: var(--muted); }
+        .milestone-detail strong { font-size: 0.875rem; color: #334155; }
+        .milestone-review { margin-left: auto; }
+        .milestone-completed { font-size: 0.8rem; font-weight: 600; }
+        .milestone-table-link, .milestone-review a { font-size: 0.875rem; font-weight: 600; }
+        .milestone-card button { position: relative; z-index: 2; }
+
+        .invoice-create {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 30px;
+            padding: 22px;
+            margin-bottom: 30px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            background: #fafafa;
+        }
+        .invoice-create h3, .invoice-list h3 { margin: 0; }
+        .invoice-create p { margin: 6px 0 0; color: #64748b; font-size: 14px; }
+        .invoice-form { display: flex; align-items: flex-end; gap: 15px; }
+        .amount-input { display: flex; flex-direction: column; gap: 7px; }
+        .amount-input label, .invoice-label { font-size: 13px; font-weight: 500; color: var(--muted); text-transform: none; }
+        .amount-input input { width: 180px; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 7px; }
+
+        .create-invoice-button, .download-invoice-button {
+            display: inline-block;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 7px;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .invoice-list { margin-top: 20px; }
+        .invoice-table-wrapper { overflow-x: auto; margin-top: 15px; }
+        .invoice-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+        .invoice-table th { padding: 10px 15px; text-align: left; font-size: 13px; color: var(--muted); text-transform: none; font-weight: 500; }
+        .invoice-table td { padding: 15px; background: white; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; }
+        .invoice-table td:first-child { border-left: 1px solid #e5e7eb; border-radius: 8px 0 0 8px; }
+        .invoice-table td:last-child { border-right: 1px solid #e5e7eb; border-radius: 0 8px 8px 0; }
+
+        .client-invoice-list { display: flex; flex-direction: column; gap: 14px; }
+        .client-invoice-card { padding: 22px; border: 1px solid #e5e7eb; border-radius: 10px; background: white; }
+        .invoice-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+        .invoice-number { font-weight: 700; font-size: 16px; }
+        .invoice-card-header p { margin: 5px 0 0; color: #64748b; font-size: 14px; }
+        .invoice-card-details { display: flex; gap: 80px; margin-top: 24px; }
+        .invoice-card-details > div { display: flex; flex-direction: column; gap: 7px; }
+        .invoice-amount { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--accent-gold); }
+        .invoice-card-actions { display: flex; justify-content: flex-end; margin-top: 22px; padding-top: 18px; border-top: 1px solid #e5e7eb; }
+
+        .current-project-card {
+            padding: 0;
+            overflow: hidden;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(30, 27, 75, 0.09);
+            margin-bottom: 28px;
+        }
+
+        .current-project-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding: 30px 32px; }
+        .project-title-section { max-width: 750px; }
+        .project-label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0; color: var(--primary); }
+        .current-project-title { margin: 0; font-size: 30px; line-height: 1.2; font-weight: 600; color: var(--text); font-family: var(--font-display); }
+        .current-project-description { max-width: 650px; margin: 10px 0 0; font-size: 15px; line-height: 1.6; color: #6b7280; }
+        .project-status { flex-shrink: 0; padding-top: 4px; }
+
+        .project-info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-top: 0;
+            border-top: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f8fafc;
+        }
+        .project-info-item { display: flex; flex-direction: column; gap: 8px; padding: 20px 28px; }
+        .project-info-item:not(:last-child) { border-right: 1px solid #e5e7eb; }
+        .info-label { font-size: 13px; font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--muted); }
+        .project-info-item strong { font-size: 15px; }
+
+        .project-progress-section { padding: 24px 32px 30px; }
+        .progress-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; font-size: 14px; font-weight: 500; }
+        .progress-header strong { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--primary); }
+        .progress-bar { width: 100%; height: 10px; overflow: hidden; border-radius: 999px; background: #e5e7eb; }
+        .progress-bar-fill { height: 100%; border-radius: inherit; background: var(--primary); transition: width 0.3s ease; }
+
+        .dashboard-welcome { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 28px; }
+        .dashboard-eyebrow { margin: 0 0 8px; font-size: 14px; font-weight: 600; letter-spacing: 0; color: var(--primary); }
+        .dashboard-welcome h1 { margin: 0; font-size: 34px; line-height: 1.2; color: var(--text); }
+        .dashboard-welcome p:not(.dashboard-eyebrow) { margin: 8px 0 0; color: #6b7280; font-size: 15px; }
+        .dashboard-date { padding: 10px 14px; background: white; border: 1px solid #e5e7eb; border-radius: 8px; color: #6b7280; font-size: 13px; font-weight: 600; }
+
+        .dashboard-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; margin-bottom: 28px; }
+        .dashboard-grid > * { min-width: 0; }
+        .dashboard-grid .card { background: #ffffff; border: 1px solid var(--border); border-radius: 14px; box-shadow: none; overflow: hidden; }
+        .dashboard-grid .card > h2, .dashboard-grid .card > h3 { padding: 24px 24px 0; margin-bottom: 20px; color: #111827; }
+        .milestone-list { padding: 0 24px 24px; }
+        .file-list { padding: 0 24px 24px; }
+        .file-item { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 10px; }
+        .file-item:hover { background: #f1f5f9; border-color: #cbd5e1; }
+
+        .client-invoice-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+        .download-invoice-button { background: #111827; color: #ffffff; padding: 9px 15px; border-radius: 8px; font-size: 13px; }
+        .download-invoice-button:hover { background: #2563eb; }
+.invoice-edit-row {
+    display: flex;
+    gap: 10px;
+}
+        @media (max-width: 850px) {
+            .container { padding: 20px 14px 40px; }
+            .grid { grid-template-columns: 1fr !important; }
+            .dashboard-welcome { flex-direction: column; align-items: flex-start; }
+            .current-project-header { flex-direction: column; padding: 20px; }
+            .current-project-title { font-size: 24px; }
+            .project-info-grid { grid-template-columns: 1fr; }
+            .project-info-item { padding: 16px 20px; }
+            .project-info-item:not(:last-child) { border-right: none; border-bottom: 1px solid #e5e7eb; }
+            .project-progress-section { padding: 20px; }
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .client-invoice-list { grid-template-columns: 1fr; }
+            .invoice-card-details { gap: 20px; flex-wrap: wrap; }
+            .invoice-create { flex-direction: column; align-items: stretch; }
+            .invoice-form { flex-direction: column; align-items: stretch; }
+            .amount-input input { width: 100%; }
+            .file-item { flex-direction: column; align-items: flex-start; }
+            .file-item .btn { align-self: flex-end; }
+            .milestone-card-header { flex-direction: column; align-items: stretch; }
+            .milestone-main { width: 100%; }
+            .milestone-title { flex-wrap: wrap; width: 100%; }
+            .invoice-edit-row {
+    flex-direction: column;
 }
 
-.activity-dropdown-footer:hover { background: #f6f7fb; }
-
-@media (max-width: 850px) {
-    .container { padding: 20px 14px 40px; }
-    .grid { grid-template-columns: 1fr !important; }
-    .dashboard-welcome { flex-direction: column; align-items: flex-start; }
-    .current-project-header { flex-direction: column; padding: 20px; }
-    .current-project-title { font-size: 24px; }
-    .project-info-grid { grid-template-columns: 1fr; }
-    .project-info-item { padding: 16px 20px; }
-    .project-info-item:not(:last-child) { border-right: none; border-bottom: 1px solid #e5e7eb; }
-    .project-progress-section { padding: 20px; }
-    .dashboard-grid { grid-template-columns: 1fr; }
-    .client-invoice-list { grid-template-columns: 1fr; }
-    .invoice-card-details { gap: 20px; flex-wrap: wrap; }
-    .invoice-create { flex-direction: column; align-items: stretch; }
-    .invoice-form { flex-direction: column; align-items: stretch; }
-    .amount-input input { width: 100%; }
-    .file-item { flex-direction: column; align-items: flex-start; }
-    .file-item .btn { align-self: flex-end; }
-    .milestone-card-header { flex-direction: column; align-items: stretch; }
-    .milestone-main { width: 100%; }
-    .milestone-title { flex-wrap: wrap; width: 100%; }
-    .invoice-edit-row { flex-direction: column; }
-    .invoice-status-select { width: 100%; }
-    .milestone-actions { width: 100%; justify-content: space-between; margin-top: 10px; }
-    .milestone-card-details { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .milestone-review { margin-left: 0; }
+.invoice-status-select {
+    width: 100%;
 }
-</style>
+            .milestone-actions { width: 100%; justify-content: space-between; margin-top: 10px; }
+            .milestone-card-details { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .milestone-review { margin-left: 0; }
+        }
+    </style>
 </head>
 <body>
 
@@ -534,9 +815,9 @@
         </div>
     </div>
 
-    <a href="{{ route('admin.projects.create') }}" class="sidebar-quick-action">
-    + New Project
-</a>
+    <a href="{{ route('admin.projects.create') }}" class="btn btn-success" style="justify-content: center; text-align: center; margin: 0 0 18px; display: block;">
+        + New Project
+    </a>
 @endif
 
                 <div class="sidebar-section-label">Workspace</div>
@@ -652,24 +933,17 @@
         var dropdown = document.getElementById('activityDropdown');
 
         if (bellButton && dropdown) {
-    bellButton.addEventListener('click', function (e) {
-        e.stopPropagation();
-        if (dropdown.classList.contains('is-open')) {
-            dropdown.classList.remove('is-open');
-        } else {
-            var rect = bellButton.getBoundingClientRect();
-            dropdown.style.top = (rect.bottom + 8) + 'px';
-            dropdown.style.left = rect.left + 'px';
-            dropdown.classList.add('is-open');
-        }
-    });
+            bellButton.addEventListener('click', function (e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('is-open');
+            });
 
-    document.addEventListener('click', function (e) {
-        if (!dropdown.contains(e.target) && e.target !== bellButton) {
-            dropdown.classList.remove('is-open');
+            document.addEventListener('click', function (e) {
+                if (!dropdown.contains(e.target) && e.target !== bellButton) {
+                    dropdown.classList.remove('is-open');
+                }
+            });
         }
-    });
-}
     })();
 </script>
     
