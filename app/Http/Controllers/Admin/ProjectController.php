@@ -50,7 +50,7 @@ class ProjectController extends Controller
 
     $project = Project::create($validated);
 
-    \App\Models\ActivityLog::record(auth()->user()->name . ' created project "' . $project->name . '"');
+    \App\Models\ActivityLog::record(auth()->user()->name . ' created project "' . $project->name . '"', route('admin.projects.edit', $project));
 
     return redirect()->route('admin.projects.create')
         ->with('success', 'Project created successfully.');

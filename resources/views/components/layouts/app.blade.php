@@ -799,10 +799,10 @@
 
         <div class="activity-dropdown" id="activityDropdown">
             @forelse($recentActivity as $item)
-                <div class="activity-dropdown-item">
+                <a href="{{ $item->url ?? route('admin.activity.index') }}" class="activity-dropdown-item" style="text-decoration: none; display: block; color: inherit; {{ !$item->is_read ? 'background: rgba(0,0,0,0.03); font-weight: 500;' : '' }}">
                     <p>{{ $item->description }}</p>
-                    <span>{{ $item->created_at->diffForHumans() }}</span>
-                </div>
+                    <span style="font-size: 0.75rem; color: var(--muted);">{{ $item->created_at->diffForHumans() }}</span>
+                </a>
             @empty
                 <div class="activity-dropdown-item">
                     <p style="color: var(--muted);">No activity yet.</p>
@@ -936,6 +936,23 @@
             bellButton.addEventListener('click', function (e) {
                 e.stopPropagation();
                 dropdown.classList.toggle('is-open');
+
+                // If dropdown just opened, clear the badge and update the database
+                var badge = bellButton.querySelector('.activity-badge');
+                if (dropdown.classList.contains('is-open') && badge) {
+                    badge.remove();
+
+                    fetch("{{ route('admin.activity_logs.mark_read') }}", {
+                        method: "POST",
+                        headers: {
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                        }
+                    }).catch(function (err) {
+                        console.error("Failed to mark notifications read:", err);
+                    });
+                }
             });
 
             document.addEventListener('click', function (e) {

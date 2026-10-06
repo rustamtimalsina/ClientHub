@@ -33,7 +33,7 @@ class InvoiceController extends Controller
 
         $invoice = $project->invoices()->create($validated);
 
-    \App\Models\ActivityLog::record(auth()->user()->name . ' created invoice "' . $invoice->invoice_number . '" for ' . $project->name);
+    \App\Models\ActivityLog::record(auth()->user()->name . ' created invoice "' . $invoice->invoice_number . '" for ' . $project->name, route('admin.invoices.create', $project));
 
     Mail::to($project->client->email)->send(new InvoiceCreatedMail($invoice));
 
