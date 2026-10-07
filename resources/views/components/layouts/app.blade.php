@@ -792,6 +792,10 @@
     <div class="activity-bell-wrapper">
         <button type="button" class="activity-bell-button" id="activityBellButton">
             <span>&#128276;</span> Notifications
+            @php
+    $unreadActivityCount = $unreadActivityCount ?? 0;
+    $recentActivity = $recentActivity ?? [];
+@endphp
             @if($unreadActivityCount > 0)
                 <span class="activity-badge">{{ $unreadActivityCount > 9 ? '9+' : $unreadActivityCount }}</span>
             @endif
@@ -808,6 +812,7 @@
                     <p style="color: var(--muted);">No activity yet.</p>
                 </div>
             @endforelse
+
 
             <a href="{{ route('admin.activity.index') }}" class="activity-dropdown-footer">
                 View all activity
