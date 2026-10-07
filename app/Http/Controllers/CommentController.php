@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ClientActivityMail;
+use App\Models\ActivityLog;
 use App\Models\Milestone;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,11 +15,16 @@ class CommentController extends Controller
     public function store(Request $request, Milestone $milestone)
     {
         $user = Auth::user();
+        $project = $milestone->project;
 
-        // Security check: only the client who owns this milestone's project,
-        // or any admin, is allowed to comment on it.
-        $isOwner = $milestone->project->client_id === $user->id;
-        $isAdmin = $user->role === 'admin';
+        // Check if user is the assigned client or an admin
+        $isAdmin = ($user->role === 'admin');
+        $isOwner = (
+            ($project->client_id && (int) $project->client_id === (int) $user->id) ||
+            ($project->user_id && (int) $project->user_id === (int) $user->id) ||
+            ($project->client && isset($project->client->user_id) && (int) $project->client->user_id === (int) $user->id) ||
+            ($project->client && isset($project->client->email) && $project->client->email === $user->email)
+        );
 
         abort_unless($isOwner || $isAdmin, 403);
 
@@ -26,14 +32,21 @@ class CommentController extends Controller
             'body' => 'required|string|max:2000',
         ]);
 
-                $milestone->comments()->create([
+        $comment = $milestone->comments()->create([
             'user_id' => $user->id,
             'body' => $request->body,
         ]);
 
-        // Only notify admins when a client comments — no need to
-        // notify anyone when an admin comments on their own project.
-        if ($isOwner) {
+        // 1. Record in Activity Log so it appears on the Activity / Notifications page
+    $projectTitle = $project->title ?? $project->name ?? 'Project';
+
+     ActivityLog::record(
+    "{$user->name} commented on milestone '{$milestone->title}' in project '{$projectTitle}'",
+    null
+);
+
+        // 2. Send email notification to admins when a client posts a comment
+        if (!$isAdmin) {
             $admins = User::where('role', 'admin')->pluck('email');
 
             if ($admins->isNotEmpty()) {

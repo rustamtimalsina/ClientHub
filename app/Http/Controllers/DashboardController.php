@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-       public function index(?Project $project = null)
+    public function index(?Project $project = null)
     {
         $user = Auth::user();
 
@@ -15,16 +15,26 @@ class DashboardController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        $allProjects = $user?->projects()->latest()->get() ?? collect();
-        if ($project) {
-            // Security check: make sure this project actually belongs to the logged-in client
-            abort_unless($project->client_id === $user->id, 403);
+        // Fetch all projects belonging to this user/client
+        $allProjects = $user->projects()->latest()->get() ?? collect();
+
+        if ($project && $project->exists) {
+            // Check that the requested project is in the user's projects list
+            $hasAccess = $allProjects->contains('id', $project->id);
+            abort_unless($hasAccess, 403);
         } else {
+            // Default to the first project
             $project = $allProjects->first();
         }
 
         if ($project) {
-            $project->load(['milestones', 'files', 'invoices']);
+            // Load relations specifically for this project
+            $project->load([
+                'milestones.comments.user',
+                'files',
+                'invoices',
+                'client',
+            ]);
         }
 
         return view('dashboard', [
