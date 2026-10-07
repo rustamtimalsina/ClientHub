@@ -62,6 +62,10 @@ class InvoiceController extends Controller
         }
 
         $invoice->update($validated);
+\App\Models\ActivityLog::record(
+            auth()->user()->name . ' updated invoice "' . $invoice->invoice_number . '" for ' . $project->name,
+            route('admin.invoices.create', $project)
+        );
 
         return redirect()->route('admin.invoices.create', $project)
             ->with('success', 'Invoice updated successfully.');
@@ -70,6 +74,10 @@ class InvoiceController extends Controller
     public function destroy(Project $project, Invoice $invoice)
     {
         $invoice->delete();
+        \App\Models\ActivityLog::record(
+            auth()->user()->name . ' deleted invoice "' . $invoice->invoice_number . '" from ' . $project->name,
+            route('admin.invoices.create', $project)
+        );
 
         return redirect()->route('admin.invoices.create', $project)
             ->with('success', 'Invoice deleted successfully.');

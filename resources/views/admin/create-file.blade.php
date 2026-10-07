@@ -1,13 +1,120 @@
 <x-layouts.app title="Files — Admin">
 
+    <style>
+        .files-header {
+            margin-bottom: 24px;
+        }
+
+        .file-upload-input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px dashed var(--border);
+            background: #fafafa;
+            font-size: 14px;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .file-upload-input:hover {
+            border-color: var(--primary);
+        }
+
+        .file-card-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: #ffffff;
+            transition: border-color 0.15s ease;
+        }
+
+        .file-card-item:hover {
+            border-color: #cbd5e1;
+        }
+
+        .file-details {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .file-badge-icon {
+            flex-shrink: 0;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #eef2ff;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .file-meta {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .file-meta strong {
+            font-size: 14px;
+            color: #1e1b4b;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-meta span {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .file-delete-form {
+            flex-shrink: 0;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .files-header h1 {
+                font-size: 26px;
+            }
+
+            .file-card-item {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+                padding: 14px;
+            }
+
+            .file-delete-form {
+                width: 100%;
+            }
+
+            .file-delete-form button {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+                padding: 9px 14px;
+            }
+        }
+    </style>
+
     <div class="dashboard">
 
-        <div class="dashboard-welcome">
-            <div>
-                <p class="dashboard-eyebrow">Admin</p>
-                <h1>{{ $project->name }}</h1>
-                <p>Upload and manage files for this project.</p>
-            </div>
+        <div class="files-header">
+            <p class="dashboard-eyebrow">Admin</p>
+            <h1 style="margin: 0 0 6px 0;">{{ $project->name }}</h1>
+            <p style="margin: 0; color: #6b7280; font-size: 14px;">Upload and manage files for this project.</p>
         </div>
 
         <x-card title="Upload File">
@@ -16,10 +123,13 @@
                 @csrf
 
                 <div style="margin-bottom: 16px;">
-                    <input type="file" name="file" required style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border); background: white;">
+                    <label style="display:block; margin-bottom: 6px; font-weight: 600; font-size: 14px;">Select File</label>
+                    <input type="file" name="file" required class="file-upload-input">
                 </div>
 
-                <button type="submit" class="btn btn-success">Upload File</button>
+                <button type="submit" class="btn btn-success" style="padding: 10px 18px;">
+                    Upload File
+                </button>
 
             </form>
 
@@ -33,24 +143,24 @@
                     message="Upload one above to get started."
                 />
             @else
-                <div class="file-list">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
                     @foreach($files as $file)
-                        <div class="file-item">
-                            <div class="file-info">
-                                <div class="file-icon">
+                        <div class="file-card-item">
+                            <div class="file-details">
+                                <div class="file-badge-icon">
                                     {{ strtoupper(pathinfo($file->original_name, PATHINFO_EXTENSION)) ?: 'FILE' }}
                                 </div>
-                                <div>
-                                    <strong>{{ $file->original_name }}</strong>
+                                <div class="file-meta">
+                                    <strong title="{{ $file->original_name }}">{{ $file->original_name }}</strong>
                                     <span>Uploaded {{ $file->created_at->format('M d, Y') }}</span>
                                 </div>
                             </div>
 
-                            <form method="POST" action="{{ route('admin.files.destroy', [$project, $file]) }}" onsubmit="return confirm('Delete this file?');">
+                            <form method="POST" action="{{ route('admin.files.destroy', [$project, $file]) }}" onsubmit="return confirm('Delete this file?');" class="file-delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-small" style="background: #dc2626; color: white; border: none;">
-                                    Delete
+                                    Delete File
                                 </button>
                             </form>
                         </div>

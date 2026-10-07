@@ -77,6 +77,10 @@ class ProjectController extends Controller
         ]);
 
         $project->update($validated);
+        \App\Models\ActivityLog::record(
+            auth()->user()->name . ' updated project "' . $project->name . '"',
+            route('admin.projects.edit', $project)
+        );
 
         return redirect()->route('admin.projects.index')
             ->with('success', 'Project updated successfully.');
@@ -85,6 +89,10 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
+        \App\Models\ActivityLog::record(
+            auth()->user()->name . ' deleted project "' . $project->name . '"',
+            route('admin.projects.index')
+        );
 
         return redirect()->route('admin.projects.index')
             ->with('success', 'Project deleted successfully.');

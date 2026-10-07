@@ -47,9 +47,6 @@ Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkE
 Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [PasswordResetController::class, 'reset'])->name('password.update');
 
-Route::get('/projects/{project}/files', [AdminFileController::class, 'create'])->name('admin.files.create');
-Route::post('/projects/{project}/files', [AdminFileController::class, 'store'])->name('admin.files.store');
-Route::delete('/projects/{project}/files/{file}', [AdminFileController::class, 'destroy'])->name('admin.files.destroy');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware('auth','no-cache')
@@ -108,6 +105,9 @@ Route::prefix('admin')->middleware(['auth', 'admin','no-cache'])->group(function
     Route::post('/projects/{project}/invoices', [AdminInvoiceController::class, 'store'])->name('admin.invoices.store');
     Route::put('/projects/{project}/invoices/{invoice}', [AdminInvoiceController::class, 'update'])->name('admin.invoices.update');
     Route::delete('/projects/{project}/invoices/{invoice}', [AdminInvoiceController::class, 'destroy'])->name('admin.invoices.destroy');
+    Route::get('/projects/{project}/files', [AdminFileController::class, 'create'])->name('admin.files.create');
+Route::post('/projects/{project}/files', [AdminFileController::class, 'store'])->name('admin.files.store');
+Route::delete('/projects/{project}/files/{file}', [AdminFileController::class, 'destroy'])->name('admin.files.destroy');
 
     Route::get('/clients', [AdminClientController::class, 'create'])->name('admin.clients.create');
     Route::post('/clients', [AdminClientController::class, 'store'])->name('admin.clients.store');
@@ -119,5 +119,4 @@ Route::prefix('admin')->middleware(['auth', 'admin','no-cache'])->group(function
 Route::post('/activity-logs/mark-read', [\App\Http\Controllers\Admin\ActivityLogController::class, 'markRead'])->name('admin.activity_logs.mark_read');
 Route::get('/activity', [App\Http\Controllers\Admin\ActivityLogController::class, 'index'])->name('admin.activity.index');
 Route::get('/activity', [App\Http\Controllers\Admin\ActivityLogController::class, 'index'])->name('admin.activity.index');
-Route::post('/activity/mark-read', [App\Http\Controllers\Admin\ActivityLogController::class, 'markRead'])->name('admin.activity.mark-read');
 });

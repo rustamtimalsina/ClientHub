@@ -25,7 +25,7 @@ class ProjectFileController extends Controller
         $uploaded = $request->file('file');
         $path = $uploaded->store('files', 'public');
 
-        $project->files()->create([
+        $projectFile = $project->files()->create([
             'uploaded_by' => auth()->id(),
             'original_name' => $uploaded->getClientOriginalName(),
             'file_path' => $path,
@@ -33,14 +33,26 @@ class ProjectFileController extends Controller
             'file_size' => $uploaded->getSize(),
         ]);
 
+        \App\Models\ActivityLog::record(
+            auth()->user()->name . ' uploaded file "' . $projectFile->original_name . '" for ' . $project->name,
+            route('admin.files.create', $project)
+        );
+
         return redirect()->route('admin.files.create', $project)
             ->with('success', 'File uploaded successfully.');
     }
 
     public function destroy(Project $project, ProjectFile $file)
     {
+        $fileName = $file->original_name;
+
         \Storage::disk('public')->delete($file->file_path);
         $file->delete();
+
+        \App\Models\ActivityLog::record(
+            auth()->user()->name . ' deleted file "' . $fileName . '" from ' . $project->name,
+            route('admin.files.create', $project)
+        );
 
         return redirect()->route('admin.files.create', $project)
             ->with('success', 'File deleted successfully.');

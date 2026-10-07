@@ -47,6 +47,7 @@ class ClientInvitationTest extends TestCase
         $client = User::factory()->create([
             'role'             => 'client',
             'invitation_token' => 'valid-invitation-token',
+            'invitation_sent_at' => now(),
         ]);
 
         $response = $this->get(route('invitations.show', ['token' => 'valid-invitation-token']));
@@ -61,6 +62,7 @@ class ClientInvitationTest extends TestCase
         $client = User::factory()->create([
             'role'             => 'client',
             'invitation_token' => 'token-to-activate',
+            'invitation_sent_at' => now(),
         ]);
 
         $response = $this->post(route('invitations.update', ['token' => 'token-to-activate']), [
