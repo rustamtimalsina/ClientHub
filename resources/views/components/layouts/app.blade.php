@@ -242,7 +242,8 @@
                 align-items: center;
                 justify-content: space-between;
                 background: var(--sidebar-bg);
-                padding: 14px 18px;
+                padding: 8px 16px;
+                min-height: 62px;
                 position: sticky;
                 top: 0;
                 z-index: 90;
@@ -1666,8 +1667,8 @@
         <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
         <aside class="sidebar" id="sidebar">
-            <a href="{{ $homeRoute }}" class="sidebar-brand" style="display: flex; justify-content: center; align-items: center; padding: 22px 18px 18px; text-decoration: none;">
-                <img src="{{ asset('images/logo-full-dark.png') }}" alt="ClientHub — Connect • Collaborate • Grow" style="width: 175px; height: auto; max-height: 125px; object-fit: contain;">
+            <a href="{{ $homeRoute }}" class="sidebar-brand" style="display: flex; justify-content: center; align-items: center; padding: 12px 14px 16px; text-decoration: none;">
+                <img src="{{ asset('images/logo-full-dark.png') }}" alt="ClientHub — Connect • Collaborate • Grow" style="width: 122px; height: auto; max-height: 90px; object-fit: contain;">
             </a>
 
                                    @unless($isGuest)
@@ -1823,7 +1824,7 @@
 
             <div class="mobile-topbar">
                 <a href="{{ $homeRoute }}" class="sidebar-brand" style="color: white; padding: 0; display: inline-flex; align-items: center; text-decoration: none;">
-                    <img src="{{ asset('images/logo-full-dark.png') }}" alt="ClientHub" style="height: 38px; width: auto; object-fit: contain;">
+                    <img src="{{ asset('images/logo-full-dark.png') }}" alt="ClientHub — Connect • Collaborate • Grow" style="height: 48px; width: auto; max-width: 80px; object-fit: contain;">
                 </a>
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <button type="button" class="mobile-menu-button theme-toggle-mobile" onclick="toggleTheme()" aria-label="Toggle Theme">
