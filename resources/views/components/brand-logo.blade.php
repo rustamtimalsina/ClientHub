@@ -23,36 +23,30 @@
             <stop offset="50%" stop-color="#312e81" />
             <stop offset="100%" stop-color="#1e1b4b" />
         </linearGradient>
-        <linearGradient id="ch-cyan-{{ $size }}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#38bdf8" />
-            <stop offset="100%" stop-color="#0284c7" />
-        </linearGradient>
     </defs>
     <!-- Background Squircle -->
     <rect x="3" y="3" width="58" height="58" rx="14" fill="url(#ch-bg-{{ $size }})" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
     
     <!-- Stylized "C" Bracket (White) -->
-    <path d="M 40 21 L 23 21 C 20.2 21 18 23.2 18 26 L 18 38 C 18 40.8 20.2 43 23 43 L 40 43" 
+    <path d="M 32 19 L 22 19 C 19.5 19 18 20.5 18 23 L 18 41 C 18 43.5 19.5 45 22 45 L 32 45" 
           fill="none" 
           stroke="#ffffff" 
           stroke-width="5" 
           stroke-linecap="round" 
           stroke-linejoin="round" />
 
-    <!-- Connected "Hub" Bridge (Cyan) -->
-    <path d="M 28 32 L 44 32" 
-          fill="none" 
-          stroke="url(#ch-cyan-{{ $size }})" 
+    <!-- Connected "Hub" Bridge (Vibrant Cyan) -->
+    <line x1="26" y1="32" x2="42" y2="32" 
+          stroke="#38bdf8" 
+          stroke-width="4.5" 
+          stroke-linecap="round" />
+
+    <!-- Receiver Pillar / Node (Vibrant Cyan) -->
+    <line x1="42" y1="25" x2="42" y2="45" 
+          stroke="#38bdf8" 
           stroke-width="5" 
           stroke-linecap="round" />
 
-    <!-- Receiver Pillar / Node (Cyan) -->
-    <path d="M 44 26 L 44 42" 
-          fill="none" 
-          stroke="url(#ch-cyan-{{ $size }})" 
-          stroke-width="5" 
-          stroke-linecap="round" />
-
-    <!-- Amber Spark / Indicator Dot (Gold) -->
-    <circle cx="44" cy="21" r="3.5" fill="#fbbf24" stroke="#fef08a" stroke-width="0.8" />
+    <!-- Glowing Amber Status Spark (Gold) -->
+    <circle cx="42" cy="18" r="3.8" fill="#fbbf24" stroke="#fef08a" stroke-width="0.8" />
 </svg>
