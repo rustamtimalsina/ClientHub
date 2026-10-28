@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'ClientHub' }}</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -125,13 +128,15 @@
         }
 
         .sidebar-brand {
-            display: block;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             text-decoration: none;
             color: #ffffff;
             font-family: var(--font-display);
-            font-size: 22px;
+            font-size: 21px;
             font-weight: 600;
-            padding: 8px 12px 28px;
+            padding: 8px 12px 24px;
             letter-spacing: -0.01em;
         }
 
@@ -1510,7 +1515,10 @@
         <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
         <aside class="sidebar" id="sidebar">
-            <a href="{{ $homeRoute }}" class="sidebar-brand">ClientHub</a>
+            <a href="{{ $homeRoute }}" class="sidebar-brand">
+                <x-brand-logo size="30" />
+                <span>ClientHub</span>
+            </a>
 
                                    @unless($isGuest)
                 <div style="display: flex; align-items: center; gap: 10px; padding: 0 12px 20px;">
@@ -1533,7 +1541,8 @@
 
     <div class="activity-bell-wrapper">
         <button type="button" class="activity-bell-button" id="activityBellButton">
-            <span>&#128276;</span> Notifications
+            <x-icon name="bell" size="16" />
+            <span>Notifications</span>
             @php
             $activityIndexRoute = $isAdmin ? route('admin.activity.index') : route('client.activity.index');
     $unreadActivityCount = $unreadActivityCount ?? 0;
@@ -1663,7 +1672,10 @@
         <div class="main-content">
 
             <div class="mobile-topbar">
-                <a href="{{ $homeRoute }}" class="sidebar-brand" style="color: white;">ClientHub</a>
+                <a href="{{ $homeRoute }}" class="sidebar-brand" style="color: white; padding: 0;">
+                    <x-brand-logo size="26" />
+                    <span>ClientHub</span>
+                </a>
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <button type="button" class="mobile-menu-button theme-toggle-mobile" onclick="toggleTheme()" aria-label="Toggle Theme">
                         <span class="theme-icon-light"><x-icon name="sun" size="16" /></span>
