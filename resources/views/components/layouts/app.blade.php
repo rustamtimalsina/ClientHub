@@ -1667,16 +1667,8 @@
         <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
         <aside class="sidebar" id="sidebar">
-            <a href="{{ $homeRoute }}" class="sidebar-brand" style="display: flex; align-items: center; gap: 11px; padding: 18px 14px 20px; text-decoration: none;">
-                <img src="{{ asset('images/logo-emblem.png') }}" alt="ClientHub Logo" style="width: 38px; height: 38px; object-fit: contain; flex-shrink: 0; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.28));">
-                <div style="min-width: 0; line-height: 1.15;">
-                    <div style="font-size: 19px; font-weight: 800; letter-spacing: -0.02em; display: flex; align-items: center; white-space: nowrap;">
-                        <span style="color: #ffffff;">Client</span><span style="color: #10b981; margin-left: 1px;">Hub</span>
-                    </div>
-                    <div style="font-size: 8.5px; color: rgba(255, 255, 255, 0.7); letter-spacing: 0.05em; font-weight: 600; margin-top: 3px; white-space: nowrap; text-transform: uppercase;">
-                        Connect <span style="color: #10b981; font-weight: 800; font-size: 10px;">&bull;</span> Collaborate <span style="color: #10b981; font-weight: 800; font-size: 10px;">&bull;</span> Grow
-                    </div>
-                </div>
+            <a href="{{ $homeRoute }}" class="sidebar-brand" style="display: flex; justify-content: center; align-items: center; padding: 18px 10px 20px; text-decoration: none;">
+                <img src="{{ asset('images/logo-horizontal-dark.png') }}" alt="ClientHub — Connect • Collaborate • Grow" style="height: 36px; width: auto; max-width: 206px; object-fit: contain;">
             </a>
 
                                    @unless($isGuest)
@@ -1831,16 +1823,8 @@
         <div class="main-content">
 
             <div class="mobile-topbar">
-                <a href="{{ $homeRoute }}" class="sidebar-brand" style="color: white; padding: 0; display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">
-                    <img src="{{ asset('images/logo-emblem.png') }}" alt="ClientHub Logo" style="height: 32px; width: 32px; object-fit: contain; flex-shrink: 0; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));">
-                    <div style="min-width: 0; line-height: 1.15;">
-                        <div style="font-size: 17px; font-weight: 800; letter-spacing: -0.02em; display: flex; align-items: center; white-space: nowrap;">
-                            <span style="color: #ffffff;">Client</span><span style="color: #10b981; margin-left: 1px;">Hub</span>
-                        </div>
-                        <div style="font-size: 7.5px; color: rgba(255, 255, 255, 0.7); letter-spacing: 0.05em; font-weight: 600; margin-top: 2px; white-space: nowrap; text-transform: uppercase;">
-                            Connect <span style="color: #10b981;">&bull;</span> Collaborate <span style="color: #10b981;">&bull;</span> Grow
-                        </div>
-                    </div>
+                <a href="{{ $homeRoute }}" class="sidebar-brand" style="color: white; padding: 0; display: inline-flex; align-items: center; text-decoration: none;">
+                    <img src="{{ asset('images/logo-horizontal-dark.png') }}" alt="ClientHub — Connect • Collaborate • Grow" style="height: 32px; width: auto; max-width: 185px; object-fit: contain;">
                 </a>
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <button type="button" class="mobile-menu-button theme-toggle-mobile" onclick="toggleTheme()" aria-label="Toggle Theme">
