@@ -1667,8 +1667,8 @@
         <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
         <aside class="sidebar" id="sidebar">
-            <a href="{{ $homeRoute }}" class="sidebar-brand" style="display: flex; justify-content: center; align-items: center; padding: 18px 10px 20px; text-decoration: none;">
-                <img src="{{ asset('images/logo-horizontal-dark.png') }}" alt="ClientHub — Connect • Collaborate • Grow" style="height: 36px; width: auto; max-width: 206px; object-fit: contain;">
+            <a href="{{ $homeRoute }}" class="sidebar-brand" style="display: flex; align-items: center; padding: 18px 14px 20px; text-decoration: none;">
+                <img src="{{ asset('images/logo-horizontal-dark.png') }}" alt="ClientHub" style="height: 34px; width: auto; max-width: 192px; object-fit: contain;">
             </a>
 
                                    @unless($isGuest)
@@ -1817,6 +1817,10 @@
                             </button>
                         </form>
                     @endunless
+
+                    <div style="padding: 12px 10px 4px; text-align: center; font-size: 9.5px; color: rgba(255, 255, 255, 0.42); letter-spacing: 0.04em; font-weight: 500; white-space: nowrap;">
+                        Connect <span style="color: #10b981; font-weight: 700;">&bull;</span> Collaborate <span style="color: #10b981; font-weight: 700;">&bull;</span> Grow
+                    </div>
                 </div>
         </aside>
 
@@ -1824,7 +1828,7 @@
 
             <div class="mobile-topbar">
                 <a href="{{ $homeRoute }}" class="sidebar-brand" style="color: white; padding: 0; display: inline-flex; align-items: center; text-decoration: none;">
-                    <img src="{{ asset('images/logo-horizontal-dark.png') }}" alt="ClientHub — Connect • Collaborate • Grow" style="height: 32px; width: auto; max-width: 185px; object-fit: contain;">
+                    <img src="{{ asset('images/logo-horizontal-dark.png') }}" alt="ClientHub" style="height: 30px; width: auto; max-width: 172px; object-fit: contain;">
                 </a>
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <button type="button" class="mobile-menu-button theme-toggle-mobile" onclick="toggleTheme()" aria-label="Toggle Theme">
