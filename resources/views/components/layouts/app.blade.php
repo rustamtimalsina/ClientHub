@@ -1667,8 +1667,9 @@
         <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
         <aside class="sidebar" id="sidebar">
-            <a href="{{ $homeRoute }}" class="sidebar-brand" style="display: flex; align-items: center; padding: 18px 14px 20px; text-decoration: none;">
-                <img src="{{ asset('images/logo-horizontal-dark.png') }}?v={{ filemtime(public_path('images/logo-horizontal-dark.png')) }}" alt="ClientHub" style="height: 34px; width: auto; max-width: 192px; object-fit: contain;">
+            <a href="{{ $homeRoute }}" class="sidebar-brand" style="display: flex; align-items: center; gap: 10px; padding: 18px 14px 20px; text-decoration: none;">
+                <img src="{{ asset('images/logo-emblem.png') }}" alt="ClientHub" style="width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));">
+                <img src="{{ asset('images/logo-wordmark-dark.png') }}?v={{ filemtime(public_path('images/logo-wordmark-dark.png')) }}" alt="ClientHub" style="height: 19px; width: auto; object-fit: contain;">
             </a>
 
                                    @unless($isGuest)
@@ -1827,8 +1828,9 @@
         <div class="main-content">
 
             <div class="mobile-topbar">
-                <a href="{{ $homeRoute }}" class="sidebar-brand" style="color: white; padding: 0; display: inline-flex; align-items: center; text-decoration: none;">
-                    <img src="{{ asset('images/logo-horizontal-dark.png') }}?v={{ filemtime(public_path('images/logo-horizontal-dark.png')) }}" alt="ClientHub" style="height: 30px; width: auto; max-width: 172px; object-fit: contain;">
+                <a href="{{ $homeRoute }}" class="sidebar-brand" style="color: white; padding: 0; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                    <img src="{{ asset('images/logo-emblem.png') }}" alt="ClientHub" style="width: 26px; height: 26px; object-fit: contain; flex-shrink: 0;">
+                    <img src="{{ asset('images/logo-wordmark-dark.png') }}?v={{ filemtime(public_path('images/logo-wordmark-dark.png')) }}" alt="ClientHub" style="height: 16px; width: auto; object-fit: contain;">
                 </a>
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <button type="button" class="mobile-menu-button theme-toggle-mobile" onclick="toggleTheme()" aria-label="Toggle Theme">
