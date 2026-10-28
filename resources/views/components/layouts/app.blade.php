@@ -1666,9 +1666,16 @@
         <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
         <aside class="sidebar" id="sidebar">
-            <a href="{{ $homeRoute }}" class="sidebar-brand">
-                <x-brand-logo size="30" />
-                <span>ClientHub</span>
+            <a href="{{ $homeRoute }}" class="sidebar-brand" style="display: flex; align-items: center; gap: 12px; padding: 18px 16px; text-decoration: none;">
+                <x-brand-logo size="36" />
+                <div style="min-width: 0; line-height: 1.2;">
+                    <div style="font-size: 19px; font-weight: 800; letter-spacing: -0.02em;">
+                        <span style="color: #ffffff;">Client</span><span style="color: #22c55e;">Hub</span>
+                    </div>
+                    <div style="font-size: 9.5px; color: rgba(255, 255, 255, 0.65); letter-spacing: 0.06em; font-weight: 500; margin-top: 2px; white-space: nowrap;">
+                        Connect &bull; Collaborate &bull; Grow
+                    </div>
+                </div>
             </a>
 
                                    @unless($isGuest)
@@ -1823,9 +1830,9 @@
         <div class="main-content">
 
             <div class="mobile-topbar">
-                <a href="{{ $homeRoute }}" class="sidebar-brand" style="color: white; padding: 0;">
-                    <x-brand-logo size="26" />
-                    <span>ClientHub</span>
+                <a href="{{ $homeRoute }}" class="sidebar-brand" style="color: white; padding: 0; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                    <x-brand-logo size="28" />
+                    <span style="font-weight: 800; font-size: 17px;"><span style="color: #ffffff;">Client</span><span style="color: #22c55e;">Hub</span></span>
                 </a>
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <button type="button" class="mobile-menu-button theme-toggle-mobile" onclick="toggleTheme()" aria-label="Toggle Theme">

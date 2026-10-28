@@ -488,9 +488,8 @@
         <div class="auth-form-side">
 
             <div class="auth-header">
-                <a href="/" class="brand-link">
-                    <x-brand-logo size="38" />
-                    <span class="brand-name">ClientHub</span>
+                <a href="/" class="brand-link" style="display: inline-flex; align-items: center; text-decoration: none;">
+                    <img src="{{ asset('images/logo-full.png') }}" alt="ClientHub — Connect • Collaborate • Grow" style="max-height: 96px; width: auto; object-fit: contain;">
                 </a>
             </div>
 
