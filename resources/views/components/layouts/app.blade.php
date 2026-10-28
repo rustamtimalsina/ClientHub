@@ -1668,7 +1668,7 @@
 
         <aside class="sidebar" id="sidebar">
             <a href="{{ $homeRoute }}" class="sidebar-brand" style="display: flex; align-items: center; padding: 18px 14px 20px; text-decoration: none;">
-                <img src="{{ asset('images/logo-horizontal-dark.png') }}" alt="ClientHub" style="height: 34px; width: auto; max-width: 192px; object-fit: contain;">
+                <img src="{{ asset('images/logo-horizontal-dark.png') }}?v={{ filemtime(public_path('images/logo-horizontal-dark.png')) }}" alt="ClientHub" style="height: 34px; width: auto; max-width: 192px; object-fit: contain;">
             </a>
 
                                    @unless($isGuest)
@@ -1828,7 +1828,7 @@
 
             <div class="mobile-topbar">
                 <a href="{{ $homeRoute }}" class="sidebar-brand" style="color: white; padding: 0; display: inline-flex; align-items: center; text-decoration: none;">
-                    <img src="{{ asset('images/logo-horizontal-dark.png') }}" alt="ClientHub" style="height: 30px; width: auto; max-width: 172px; object-fit: contain;">
+                    <img src="{{ asset('images/logo-horizontal-dark.png') }}?v={{ filemtime(public_path('images/logo-horizontal-dark.png')) }}" alt="ClientHub" style="height: 30px; width: auto; max-width: 172px; object-fit: contain;">
                 </a>
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <button type="button" class="mobile-menu-button theme-toggle-mobile" onclick="toggleTheme()" aria-label="Toggle Theme">
