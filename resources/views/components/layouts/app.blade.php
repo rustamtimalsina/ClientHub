@@ -1666,16 +1666,8 @@
         <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
         <aside class="sidebar" id="sidebar">
-            <a href="{{ $homeRoute }}" class="sidebar-brand" style="display: flex; align-items: center; gap: 12px; padding: 18px 16px; text-decoration: none;">
-                <x-brand-logo size="36" />
-                <div style="min-width: 0; line-height: 1.2;">
-                    <div style="font-size: 19px; font-weight: 800; letter-spacing: -0.02em;">
-                        <span style="color: #ffffff;">Client</span><span style="color: #22c55e;">Hub</span>
-                    </div>
-                    <div style="font-size: 9.5px; color: rgba(255, 255, 255, 0.65); letter-spacing: 0.06em; font-weight: 500; margin-top: 2px; white-space: nowrap;">
-                        Connect &bull; Collaborate &bull; Grow
-                    </div>
-                </div>
+            <a href="{{ $homeRoute }}" class="sidebar-brand" style="display: flex; justify-content: center; align-items: center; padding: 22px 18px 18px; text-decoration: none;">
+                <img src="{{ asset('images/logo-full-dark.png') }}" alt="ClientHub — Connect • Collaborate • Grow" style="width: 175px; height: auto; max-height: 125px; object-fit: contain;">
             </a>
 
                                    @unless($isGuest)
@@ -1830,9 +1822,8 @@
         <div class="main-content">
 
             <div class="mobile-topbar">
-                <a href="{{ $homeRoute }}" class="sidebar-brand" style="color: white; padding: 0; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
-                    <x-brand-logo size="28" />
-                    <span style="font-weight: 800; font-size: 17px;"><span style="color: #ffffff;">Client</span><span style="color: #22c55e;">Hub</span></span>
+                <a href="{{ $homeRoute }}" class="sidebar-brand" style="color: white; padding: 0; display: inline-flex; align-items: center; text-decoration: none;">
+                    <img src="{{ asset('images/logo-full-dark.png') }}" alt="ClientHub" style="height: 38px; width: auto; object-fit: contain;">
                 </a>
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <button type="button" class="mobile-menu-button theme-toggle-mobile" onclick="toggleTheme()" aria-label="Toggle Theme">

@@ -37,6 +37,14 @@
             -webkit-overflow-scrolling: touch;
         }
 
+        .project-selector-bar a {
+            transition: all 0.15s ease;
+        }
+
+        .project-selector-bar a:hover {
+            border-color: var(--primary) !important;
+        }
+
         /* --- Fix for label cutting through card border --- */
         .current-project-header-row {
             display: flex;
@@ -503,7 +511,7 @@
                         <a
                             href="{{ route('dashboard.project', $p) }}"
                             class="btn btn-small"
-                            style="{{ $p->id === $project->id ? 'background: var(--primary); color: white; border-color: var(--primary);' : 'background: white;' }}"
+                            style="{{ $p->id === $project->id ? 'background: var(--primary); color: #ffffff; border-color: var(--primary); font-weight: 600;' : 'background: var(--surface); color: var(--text); border: 1px solid var(--border); font-weight: 500;' }}"
                         >
                             {{ $p->name }}
                         </a>
