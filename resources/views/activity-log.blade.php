@@ -192,33 +192,33 @@
                     <div class="pagination-container">
         
                         @if($logs->onFirstPage())
-                            <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: #999; background: #f5f5f5;">
+                            <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); background: var(--bg);">
                                 Previous
                             </span>
                         @else
-                            <a href="{{ $logs->previousPageUrl() }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: white;">
+                            <a href="{{ $logs->previousPageUrl() }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: var(--surface);">
                                 Previous
                             </a>
                         @endif
 
                         @foreach($logs->getUrlRange(1, $logs->lastPage()) as $page => $url)
                             @if($page == $logs->currentPage())
-                                <span style="padding: 8px 12px; border: 1px solid #2563eb; border-radius: 8px; background: #2563eb; color: white; font-weight: 600;">
+                                <span style="padding: 8px 12px; border: 1px solid var(--primary); border-radius: 8px; background: var(--primary); color: white; font-weight: 600;">
                                     {{ $page }}
                                 </span>
                             @else
-                                <a href="{{ $url }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: white;">
+                                <a href="{{ $url }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: var(--surface);">
                                     {{ $page }}
                                 </a>
                             @endif
                         @endforeach
 
                         @if($logs->hasMorePages())
-                            <a href="{{ $logs->nextPageUrl() }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: white;">
+                            <a href="{{ $logs->nextPageUrl() }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: var(--surface);">
                                 Next
                             </a>
                         @else
-                            <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: #999; background: #f5f5f5;">
+                            <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); background: var(--bg);">
                                 Next
                             </span>
                         @endif

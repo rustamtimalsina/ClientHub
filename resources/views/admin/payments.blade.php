@@ -61,23 +61,23 @@
                 @if($payments->hasPages())
                     <div style="margin-top: 20px; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap;">
                         @if($payments->onFirstPage())
-                            <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: #999; background: #f5f5f5;">Previous</span>
+                            <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); background: var(--bg);">Previous</span>
                         @else
-                            <a href="{{ $payments->previousPageUrl() }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: white;">Previous</a>
+                            <a href="{{ $payments->previousPageUrl() }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: var(--surface);">Previous</a>
                         @endif
 
                         @foreach($payments->getUrlRange(1, $payments->lastPage()) as $page => $url)
                             @if($page == $payments->currentPage())
                                 <span style="padding: 8px 12px; border: 1px solid var(--primary); border-radius: 8px; background: var(--primary); color: white; font-weight: 600;">{{ $page }}</span>
                             @else
-                                <a href="{{ $url }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: white;">{{ $page }}</a>
+                                <a href="{{ $url }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: var(--surface);">{{ $page }}</a>
                             @endif
                         @endforeach
 
                         @if($payments->hasMorePages())
-                            <a href="{{ $payments->nextPageUrl() }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: white;">Next</a>
+                            <a href="{{ $payments->nextPageUrl() }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: var(--surface);">Next</a>
                         @else
-                            <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: #999; background: #f5f5f5;">Next</span>
+                            <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); background: var(--bg);">Next</span>
                         @endif
                     </div>
                 @endif

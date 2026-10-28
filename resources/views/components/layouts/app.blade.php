@@ -912,21 +912,21 @@
         .dashboard-welcome { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 28px; }
         .dashboard-eyebrow { margin: 0 0 8px; font-size: 14px; font-weight: 600; letter-spacing: 0; color: var(--primary); }
         .dashboard-welcome h1 { margin: 0; font-size: 34px; line-height: 1.2; color: var(--text); }
-        .dashboard-welcome p:not(.dashboard-eyebrow) { margin: 8px 0 0; color: #6b7280; font-size: 15px; }
-        .dashboard-date { padding: 10px 14px; background: white; border: 1px solid #e5e7eb; border-radius: 8px; color: #6b7280; font-size: 13px; font-weight: 600; }
+        .dashboard-welcome p:not(.dashboard-eyebrow) { margin: 8px 0 0; color: var(--muted); font-size: 15px; }
+        .dashboard-date { padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-size: 13px; font-weight: 600; }
 
         .dashboard-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; margin-bottom: 28px; }
         .dashboard-grid > * { min-width: 0; }
-        .dashboard-grid .card { background: #ffffff; border: 1px solid var(--border); border-radius: 14px; box-shadow: none; overflow: hidden; }
-        .dashboard-grid .card > h2, .dashboard-grid .card > h3 { padding: 24px 24px 0; margin-bottom: 20px; color: #111827; }
+        .dashboard-grid .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; box-shadow: none; overflow: hidden; }
+        .dashboard-grid .card > h2, .dashboard-grid .card > h3 { padding: 24px 24px 0; margin-bottom: 20px; color: var(--text); }
         .milestone-list { padding: 0 24px 24px; }
         .file-list { padding: 0 24px 24px; }
-        .file-item { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 10px; }
-        .file-item:hover { background: #f1f5f9; border-color: #cbd5e1; }
+        .file-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+        .file-item:hover { background: var(--bg); border-color: var(--primary); }
 
         .client-invoice-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-        .download-invoice-button { background: #111827; color: #ffffff; padding: 9px 15px; border-radius: 8px; font-size: 13px; }
-        .download-invoice-button:hover { background: #2563eb; }
+        .download-invoice-button { background: var(--primary); color: #ffffff; padding: 9px 15px; border-radius: 8px; font-size: 13px; }
+        .download-invoice-button:hover { opacity: 0.9; }
 .invoice-edit-row {
     display: flex;
     gap: 10px;
@@ -1334,6 +1334,143 @@
 
         [data-theme="dark"] .btn:hover {
             background: #1e293b;
+        }
+
+        /* Invoice list & status tabs in dark mode */
+        [data-theme="dark"] .inv-tab {
+            background: #111827;
+            color: #94a3b8;
+            border-color: #1f293d;
+        }
+
+        [data-theme="dark"] .inv-tab:hover {
+            background: #1a243b;
+            color: #f3f4f6;
+            border-color: #6366f1;
+        }
+
+        [data-theme="dark"] .inv-tab.active {
+            background: #4f46e5 !important;
+            color: #ffffff !important;
+            border-color: #4f46e5 !important;
+        }
+
+        [data-theme="dark"] .inv-row {
+            background: #111827;
+            border-color: #1f293d;
+        }
+
+        [data-theme="dark"] .inv-row:hover {
+            background: #151e30;
+            border-color: #3b82f6;
+        }
+
+        [data-theme="dark"] .inv-row.is-overdue {
+            background: rgba(239, 68, 68, 0.08);
+            border-color: rgba(239, 68, 68, 0.35);
+        }
+
+        [data-theme="dark"] .inv-main strong {
+            color: #f3f4f6 !important;
+        }
+
+        /* Dashboard status rows and project cards in dark mode */
+        [data-theme="dark"] .status-legend-item {
+            background: #111827;
+            border-color: #1f293d;
+            color: #f3f4f6;
+        }
+
+        [data-theme="dark"] .status-legend-item:hover,
+        [data-theme="dark"] .status-legend-item.is-hovered {
+            background: #172033;
+            border-color: #6366f1;
+        }
+
+        [data-theme="dark"] .status-percent-pill {
+            background: #0c121e;
+            border-color: #1f293d;
+            color: #94a3b8;
+        }
+
+        [data-theme="dark"] .status-progress-track {
+            background: #1e293b;
+        }
+
+        [data-theme="dark"] .recent-project-row {
+            background: #111827;
+            border-color: #1f293d;
+            color: #f3f4f6;
+        }
+
+        [data-theme="dark"] .recent-project-row:hover {
+            background: #172033;
+            border-color: #6366f1;
+        }
+
+        /* Client dashboard components in dark mode */
+        [data-theme="dark"] .client-file-item {
+            background: #111827;
+            border-color: #1f293d;
+            color: #f3f4f6;
+        }
+
+        [data-theme="dark"] .client-file-item:hover {
+            background: #172033;
+            border-color: #6366f1;
+        }
+
+        [data-theme="dark"] .client-invoice-card {
+            background: #111827 !important;
+            border-color: #1f293d !important;
+        }
+
+        [data-theme="dark"] .roadmap-step-pill {
+            background: #111827;
+            border-color: #1f293d;
+            color: #94a3b8;
+        }
+
+        [data-theme="dark"] .roadmap-step-pill:hover {
+            background: #1a243b;
+            color: #f3f4f6;
+            border-color: #6366f1;
+        }
+
+        [data-theme="dark"] .revision-popover {
+            background: #111827;
+            border-color: #1f293d;
+            color: #f3f4f6;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="dark"] .file-card-item {
+            background: #111827 !important;
+            border-color: #1f293d !important;
+            color: #f3f4f6 !important;
+        }
+
+        [data-theme="dark"] .file-card-item:hover {
+            background: #172033 !important;
+            border-color: #6366f1 !important;
+        }
+
+        [data-theme="dark"] .invoice-card-custom {
+            background: #111827 !important;
+            border-color: #1f293d !important;
+            color: #f3f4f6 !important;
+        }
+
+        [data-theme="dark"] .milestone-manage-card {
+            background: #111827 !important;
+            border-color: #1f293d !important;
+            color: #f3f4f6 !important;
+        }
+
+        [data-theme="dark"] .dropzone-preview {
+            background: #111827 !important;
+            border-color: #1f293d !important;
+            color: #f3f4f6 !important;
         }
 
         [data-theme="dark"] .btn-success {

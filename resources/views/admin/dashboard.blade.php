@@ -70,7 +70,7 @@
             flex-direction: column;
             gap: 8px;
             padding: 10px 14px;
-            background: #ffffff;
+            background: var(--surface);
             border-radius: 10px;
             border: 1px solid var(--border);
             text-decoration: none;
@@ -81,10 +81,10 @@
 
         .status-legend-item:hover,
         .status-legend-item.is-hovered {
-            background: #f8fafc;
-            border-color: #cbd5e1;
+            background: var(--bg);
+            border-color: var(--primary);
             transform: translateX(3px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .status-legend-item:hover .status-row-arrow,
@@ -117,15 +117,16 @@
             font-size: 11.5px;
             font-weight: 600;
             color: var(--muted);
-            background: #f1f5f9;
+            background: var(--bg);
             padding: 2px 7px;
             border-radius: 999px;
+            border: 1px solid var(--border);
         }
 
         .status-progress-track {
             height: 4px;
             width: 100%;
-            background: #f1f5f9;
+            background: var(--border);
             border-radius: 999px;
             overflow: hidden;
         }
@@ -193,14 +194,14 @@
             gap: 14px;
             padding: 14px 16px;
             border: 1px solid var(--border);
-            border-radius: 10px;
-            background: #ffffff;
+            border-radius: 12px;
+            background: var(--surface);
             transition: border-color 0.15s ease, background 0.15s ease;
         }
 
         .recent-project-row:hover {
-            border-color: #cbd5e1;
-            background: #fafbfc;
+            border-color: var(--primary);
+            background: var(--bg);
         }
 
         @media (max-width: 900px) {
@@ -251,10 +252,10 @@
         </div>
 
         @if($stats['overdue_invoices'] > 0)
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; background: #fff5f5; border: 1px solid #fecaca; border-radius: 12px; padding: 14px 20px; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; background: var(--danger-bg); border: 1px solid var(--border); border-left: 4px solid #ef4444; border-radius: 12px; padding: 14px 20px; margin-bottom: 20px;">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <x-icon name="alert-circle" size="20" class="text-danger" style="color: #dc2626;" />
-                    <span style="color: #991b1b; font-weight: 600; font-size: 14.5px;">
+                    <x-icon name="alert-circle" size="20" class="text-danger" style="color: #ef4444;" />
+                    <span style="color: var(--danger-text); font-weight: 600; font-size: 14.5px;">
                         {{ $stats['overdue_invoices'] }} invoice(s) overdue — clients have been notified automatically.
                     </span>
                 </div>

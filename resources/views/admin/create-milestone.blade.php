@@ -23,7 +23,7 @@
         .milestone-manage-card {
             border: 1px solid var(--border);
             border-radius: 12px;
-            background: #ffffff;
+            background: var(--surface);
             padding: 20px;
             margin-bottom: 16px;
         }

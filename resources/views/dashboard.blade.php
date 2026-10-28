@@ -90,13 +90,14 @@
         .revision-popover {
             margin-top: 10px;
             padding: 14px;
-            background: #ffffff;
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 10px;
             width: 100%;
             max-width: 360px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
             box-sizing: border-box;
+            color: var(--text);
         }
 
         .client-file-item {
@@ -107,7 +108,14 @@
             padding: 14px 16px;
             border: 1px solid var(--border);
             border-radius: 10px;
-            background: #ffffff;
+            background: var(--surface);
+            color: var(--text);
+            transition: all 0.15s ease;
+        }
+
+        .client-file-item:hover {
+            border-color: var(--primary);
+            background: var(--bg);
         }
 
         .invoice-card-buttons {
@@ -124,10 +132,11 @@
             border: 1px solid var(--border);
             border-radius: 12px;
             margin-bottom: 12px;
-            background: #ffffff;
+            background: var(--surface);
             padding: 16px 18px;
             border-left: 4px solid #cbd5e1;
             transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--text);
         }
 
         .milestone-card[data-status="completed"] { border-left-color: #10b981; }
@@ -135,8 +144,8 @@
         .milestone-card[data-status="pending"] { border-left-color: #94a3b8; }
 
         .milestone-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-            border-color: #cbd5e1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary);
         }
 
         .milestone-card.is-highlighted {
@@ -219,7 +228,7 @@
             cursor: pointer;
             white-space: nowrap;
             transition: all 0.15s ease;
-            background: #ffffff;
+            background: var(--surface);
             border: 1px solid var(--border);
             color: var(--muted);
             flex-shrink: 0;
@@ -228,8 +237,8 @@
 
         .roadmap-step-pill:hover {
             transform: translateY(-1px);
-            border-color: #cbd5e1;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            border-color: var(--primary);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
             color: var(--text);
         }
 
@@ -422,8 +431,8 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            background: #ffffff;
-            border: 1px solid var(--border, #e4e4f0);
+            background: var(--surface);
+            border: 1px solid var(--border);
             border-radius: 8px;
             padding: 10px 14px;
             text-align: left;
@@ -437,7 +446,7 @@
         .dropzone-preview-name {
             font-size: 13px;
             font-weight: 600;
-            color: #1e1b4b;
+            color: var(--text);
             display: block;
             white-space: nowrap;
             overflow: hidden;
@@ -677,14 +686,14 @@
 
                                         {{-- Full Description --}}
                                         @if($milestone->description)
-                                            <div style="font-size: 13.5px; color: #4b5563; line-height: 1.5;">
+                                            <div style="font-size: 13.5px; color: var(--text); line-height: 1.5;">
                                                 {{ $milestone->description }}
                                             </div>
                                         @endif
 
                                         {{-- Revision Notes --}}
                                         @if($milestone->client_notes && $milestone->status !== 'completed')
-                                            <div style="padding: 12px 14px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; font-size: 13px; color: #92400e;">
+                                            <div style="padding: 12px 14px; background: var(--warning-bg); border: 1px solid var(--border); border-left: 3px solid #f59e0b; border-radius: 8px; font-size: 13px; color: var(--warning-text);">
                                                 <strong style="display: block; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">Your Revision Notes</strong>
                                                 {{ $milestone->client_notes }}
                                             </div>
@@ -702,17 +711,17 @@
 
                                                 @if(Route::has('client.milestones.request-revision'))
                                                     <details style="position: relative;">
-                                                        <summary class="btn btn-small" style="list-style: none; cursor: pointer; border-color: #cbd5e1; background: white;">
+                                                        <summary class="btn btn-small" style="list-style: none; cursor: pointer;">
                                                             Request Changes
                                                         </summary>
                                                         <div class="revision-popover">
                                                             <form method="POST" action="{{ route('client.milestones.request-revision', $milestone) }}" style="margin: 0;">
                                                                 @csrf
-                                                                <label style="display: block; font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 6px;">
+                                                                <label style="display: block; font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 6px;">
                                                                     What needs revision?
                                                                 </label>
                                                                 <textarea name="client_notes" rows="3" style="width: 100%; padding: 8px 10px; font-size: 13px; margin-bottom: 10px; border: 1px solid var(--border); border-radius: 6px; box-sizing: border-box;" placeholder="e.g. Please update the button styles and spacing..." required>{{ old('client_notes', $milestone->client_notes) }}</textarea>
-                                                                <button type="submit" class="btn btn-small" style="background: var(--warning-bg); color: var(--warning-text); border: 1px solid #fde68a; width: 100%;">
+                                                                <button type="submit" class="btn btn-small" style="background: var(--warning-bg); color: var(--warning-text); border: 1px solid var(--border); width: 100%;">
                                                                     Submit Feedback
                                                                 </button>
                                                             </form>
@@ -725,7 +734,7 @@
                                         {{-- Comments --}}
                                         <div style="margin-top: 14px; border-top: 1px solid var(--border); padding-top: 14px;">
                                             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                                                <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #1e1b4b; letter-spacing: 0.03em; display: inline-flex; align-items: center; gap: 5px;">
+                                                <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text); letter-spacing: 0.03em; display: inline-flex; align-items: center; gap: 5px;">
                                                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                                                     Comments
                                                 </span>
@@ -744,7 +753,7 @@
                                                             ->join('') ?: 'U';
                                                         $cIsAdmin = ($comment->user->role ?? null) === 'admin';
                                                     @endphp
-                                                    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 9px; padding: 10px 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
+                                                    <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 9px; padding: 10px 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
                                                         <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 5px;">
                                                             <div style="display: flex; align-items: center; gap: 7px;">
                                                                 <span style="width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 700; background: {{ $cIsAdmin ? '#4f46e5' : '#0d9488' }}; color: white; flex-shrink: 0;">
@@ -948,10 +957,10 @@
                 @else
                     <div class="client-invoice-list" style="display: flex; flex-direction: column; gap: 14px;">
                         @foreach($invoices as $invoice)
-                            <div class="client-invoice-card" style="border: 1px solid var(--border); border-radius: 10px; padding: 18px; background: #ffffff;">
+                            <div class="client-invoice-card" style="border: 1px solid var(--border); border-radius: 10px; padding: 18px; background: var(--surface);">
                                 <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px;">
                                     <div>
-                                        <span style="font-weight: 700; font-size: 15px; color: #1e1b4b;">{{ $invoice->invoice_number }}</span>
+                                        <span style="font-weight: 700; font-size: 15px; color: var(--text);">{{ $invoice->invoice_number }}</span>
                                         <p style="margin: 2px 0 0; font-size: 13px; color: var(--muted);">{{ $project->name }}</p>
                                     </div>
                                     <x-status-badge :status="$invoice->status" />
@@ -960,12 +969,12 @@
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 13px;">
                                     <div>
                                         <span class="invoice-label" style="display: block; font-size: 11px; color: var(--muted); text-transform: uppercase;">Issued</span>
-                                        <strong>{{ $invoice->issued_at?->format('M d, Y') ?? '—' }}</strong>
+                                        <strong style="color: var(--text);">{{ $invoice->issued_at?->format('M d, Y') ?? '—' }}</strong>
                                     </div>
 
                                     <div style="text-align: right;">
                                         <span class="invoice-label" style="display: block; font-size: 11px; color: var(--muted); text-transform: uppercase;">Amount</span>
-                                        <strong style="font-size: 15px; color: #1e1b4b;">NPR {{ number_format($invoice->amount, 2) }}</strong>
+                                        <strong style="font-size: 15px; color: var(--text);">NPR {{ number_format($invoice->amount, 2) }}</strong>
                                     </div>
                                 </div>
 

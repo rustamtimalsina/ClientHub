@@ -4,10 +4,12 @@
         .inv-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
         .inv-filters { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
         .inv-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
-        .inv-tab { padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px; text-decoration: none; color: inherit; background: white; font-size: 13px; }
-        .inv-tab.active { background: #1e1b4b; color: white; border-color: #1e1b4b; }
-        .inv-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; background: #fafafa; }
-        .inv-row.is-overdue { border-color: #fca5a5; background: #fef2f2; }
+        .inv-tab { padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px; text-decoration: none; color: var(--muted); background: var(--surface); font-size: 13px; font-weight: 500; transition: all 0.15s ease; }
+        .inv-tab:hover { background: var(--bg); color: var(--text); border-color: var(--primary); }
+        .inv-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .inv-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); transition: all 0.15s ease; }
+        .inv-row:hover { border-color: var(--primary); }
+        .inv-row.is-overdue { border-color: rgba(239, 68, 68, 0.4); background: var(--danger-bg); }
         .inv-right { display: flex; align-items: center; gap: 14px; text-align: right; }
         .inv-main { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
         @media (max-width: 768px) {
@@ -85,7 +87,7 @@
                         @endphp
                         <div class="inv-row {{ $invoice->status === 'overdue' ? 'is-overdue' : '' }}">
                             <div class="inv-main">
-                                <strong style="color: #1e1b4b;">{{ $invoice->invoice_number }}</strong>
+                                <strong style="color: var(--text);">{{ $invoice->invoice_number }}</strong>
                                 <span style="font-size: 13px; color: var(--muted);">
                                     {{ $invoice->project->client->name ?? 'N/A' }} &middot; {{ $invoice->project->name ?? 'N/A' }}
                                 </span>
@@ -103,7 +105,7 @@
                             <div class="inv-right">
                                 <strong>NPR {{ number_format($invoice->amount, 2) }}</strong>
                                 <x-status-badge :status="$invoice->status" />
-                                <a href="{{ route('invoices.download', $invoice) }}" class="btn btn-small" style="background: white; border: 1px solid var(--border); color: #374151;">PDF</a>
+                                <a href="{{ route('invoices.download', $invoice) }}" class="btn btn-small">PDF</a>
                                 @if($invoice->project)
                                     <a href="{{ route('admin.invoices.create', $invoice->project) }}" class="btn btn-small">Manage</a>
                                 @endif
@@ -115,15 +117,15 @@
                 @if($invoices->hasPages())
                     <div style="margin-top: 20px; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap;">
                         @if($invoices->onFirstPage())
-                            <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: #999; background: #f5f5f5;">Previous</span>
+                            <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); background: var(--bg);">Previous</span>
                         @else
-                            <a href="{{ $invoices->previousPageUrl() }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: white;">Previous</a>
+                            <a href="{{ $invoices->previousPageUrl() }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: var(--surface);">Previous</a>
                         @endif
                         <span style="padding: 8px 12px; color: var(--muted);">Page {{ $invoices->currentPage() }} of {{ $invoices->lastPage() }}</span>
                         @if($invoices->hasMorePages())
-                            <a href="{{ $invoices->nextPageUrl() }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: white;">Next</a>
+                            <a href="{{ $invoices->nextPageUrl() }}" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: var(--surface);">Next</a>
                         @else
-                            <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: #999; background: #f5f5f5;">Next</span>
+                            <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); background: var(--bg);">Next</span>
                         @endif
                     </div>
                 @endif

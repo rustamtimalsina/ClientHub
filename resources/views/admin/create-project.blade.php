@@ -24,7 +24,8 @@
             border: 1px solid var(--border);
             font-size: 14px;
             font-family: inherit;
-            background: #ffffff;
+            background: var(--surface);
+            color: var(--text);
             box-sizing: border-box;
             transition: border-color 0.15s ease;
         }

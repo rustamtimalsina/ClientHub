@@ -28,7 +28,7 @@
             padding: 16px;
             border: 1px solid var(--border);
             border-radius: 12px;
-            background: #ffffff;
+            background: var(--surface);
             transition: all 0.2s ease;
         }
 
@@ -166,8 +166,8 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            background: #ffffff;
-            border: 1px solid var(--border, #e4e4f0);
+            background: var(--surface);
+            border: 1px solid var(--border);
             border-radius: 8px;
             padding: 10px 14px;
             text-align: left;
