@@ -123,9 +123,10 @@
 
     <div class="auth-wrapper">
 
-        <div class="auth-brand">
-            <x-brand-logo size="34" />
-            <h1>ClientHub</h1>
+                <div class="auth-brand" style="display: flex; justify-content: center; margin-bottom: 24px;">
+            <a href="/" style="display: inline-block; text-decoration: none;">
+                <img src="{{ asset('images/logo-full.png') }}" alt="ClientHub — Connect • Collaborate • Grow" style="max-height: 84px; width: auto; object-fit: contain;">
+            </a>
         </div>
 
         <div class="auth-card">
