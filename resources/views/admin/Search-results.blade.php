@@ -40,7 +40,7 @@
                     <div>
                         @foreach($projects as $project)
                             <a href="{{ route('admin.projects.edit', $project) }}" class="search-result-row">
-                                <div class="search-result-icon" style="background: #eef2ff; color: var(--primary);">
+                                <div class="search-result-icon" style="background: rgba(99, 102, 241, 0.15); color: var(--primary);">
                                     <x-icon name="folder" size="18" />
                                 </div>
                                 <div class="search-result-info">
@@ -60,7 +60,7 @@
                     <div>
                         @foreach($invoices as $invoice)
                             <a href="{{ $invoice->project ? route('admin.invoices.create', $invoice->project) : route('admin.invoices.index') }}" class="search-result-row">
-                                <div class="search-result-icon" style="background: #fef3c7; color: #92400e;">
+                                <div class="search-result-icon" style="background: var(--warning-bg); color: var(--warning-text);">
                                     <x-icon name="credit-card" size="18" />
                                 </div>
                                 <div class="search-result-info">
@@ -80,7 +80,7 @@
                     <div>
                         @foreach($clients as $client)
                             <a href="{{ route('admin.clients.create') }}" class="search-result-row">
-                                <div class="search-result-icon" style="background: #dcfce7; color: #166534; font-weight: 700; font-size: 13px;">
+                                <div class="search-result-icon" style="background: var(--success-bg); color: var(--success-text); font-weight: 700; font-size: 13px;">
                                     {{ strtoupper(substr($client->name, 0, 1)) }}
                                 </div>
                                 <div class="search-result-info">

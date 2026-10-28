@@ -44,12 +44,12 @@
             </x-card>
             <x-card>
                 <span class="info-label">Overdue</span>
-                <h2 style="margin: 6px 0 0; font-size: 26px; color: #dc2626;">NPR {{ number_format($overdue->amount ?? 0, 2) }}</h2>
+                <h2 style="margin: 6px 0 0; font-size: 26px; color: var(--danger-text);">NPR {{ number_format($overdue->amount ?? 0, 2) }}</h2>
                 <span style="font-size: 12px; color: var(--muted);">{{ $overdue->total ?? 0 }} invoice(s)</span>
             </x-card>
             <x-card>
                 <span class="info-label">Paid</span>
-                <h2 style="margin: 6px 0 0; font-size: 26px; color: #16a34a;">NPR {{ number_format($paid->amount ?? 0, 2) }}</h2>
+                <h2 style="margin: 6px 0 0; font-size: 26px; color: var(--success-text);">NPR {{ number_format($paid->amount ?? 0, 2) }}</h2>
                 <span style="font-size: 12px; color: var(--muted);">{{ $paid->total ?? 0 }} invoice(s)</span>
             </x-card>
         </div>

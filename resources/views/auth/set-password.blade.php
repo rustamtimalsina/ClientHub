@@ -12,7 +12,7 @@
 
         @if($errors->any())
             <x-card>
-                <p style="color: #dc2626; font-weight: bold; margin: 0;">{{ $errors->first() }}</p>
+                <p style="color: var(--danger-text); font-weight: bold; margin: 0;">{{ $errors->first() }}</p>
             </x-card>
         @endif
 

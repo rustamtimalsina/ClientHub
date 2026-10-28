@@ -12,7 +12,7 @@
 
         <x-card>
             <span class="info-label">Total Received</span>
-            <h2 style="margin: 6px 0 0; font-size: 28px; color: #16a34a;">
+            <h2 style="margin: 6px 0 0; font-size: 28px; color: var(--success-text);">
                 NPR {{ number_format($totalReceived, 2) }}
             </h2>
         </x-card>

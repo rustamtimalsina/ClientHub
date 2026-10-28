@@ -131,6 +131,24 @@
             color: #f87171;
         }
 
+        .growth-positive {
+            color: #16a34a;
+            font-weight: 600;
+        }
+
+        .growth-negative {
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        [data-theme="dark"] .growth-positive {
+            color: #4ade80;
+        }
+
+        [data-theme="dark"] .growth-negative {
+            color: #f87171;
+        }
+
         /* Charts Layout */
         .analytics-charts-grid {
             display: grid;
@@ -717,11 +735,11 @@
                                         @if($row['mom_growth'] === null)
                                             <span style="color: var(--muted);">—</span>
                                         @elseif($row['mom_growth'] > 999)
-                                            <span style="color: #16a34a; font-weight: 600;" title="+{{ number_format($row['mom_growth'], 1) }}%">> +999%</span>
+                                            <span class="growth-positive" title="+{{ number_format($row['mom_growth'], 1) }}%">> +999%</span>
                                         @elseif($row['mom_growth'] >= 0)
-                                            <span style="color: #16a34a; font-weight: 600;">+{{ number_format($row['mom_growth'], 1) }}%</span>
+                                            <span class="growth-positive">+{{ number_format($row['mom_growth'], 1) }}%</span>
                                         @else
-                                            <span style="color: #dc2626; font-weight: 600;">{{ number_format($row['mom_growth'], 1) }}%</span>
+                                            <span class="growth-negative">{{ number_format($row['mom_growth'], 1) }}%</span>
                                         @endif
                                     </td>
                                 </tr>

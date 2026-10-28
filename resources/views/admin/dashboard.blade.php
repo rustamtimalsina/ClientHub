@@ -317,11 +317,11 @@
                 <div class="stat-card-inner">
                     <div class="stat-card-top">
                         <span class="info-label">Outstanding</span>
-                        <div class="stat-icon-wrap" style="background: #fee2e2; color: #dc2626;">
+                        <div class="stat-icon-wrap" style="background: var(--danger-bg); color: var(--danger-text);">
                             <x-icon name="credit-card" size="18" />
                         </div>
                     </div>
-                    <h2 class="stat-number" style="color: #dc2626;">
+                    <h2 class="stat-number" style="color: var(--danger-text);">
                         NPR {{ number_format($stats['outstanding_amount'], 0) }}
                     </h2>
                     <p class="stat-subtext">Unpaid invoices</p>

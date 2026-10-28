@@ -330,7 +330,7 @@
     width: 11px;
     height: 11px;
     border-radius: 50%;
-    background: #1e1b4b;
+    background: var(--muted);
     margin-top: 4px;
     flex-shrink: 0;
 }
@@ -340,7 +340,7 @@
 .activity-description {
     margin: 0 0 4px;
     font-size: 14px;
-    color: #1e1b4b;
+    color: var(--text);
     font-weight: 500;
 }
 
@@ -407,13 +407,13 @@
 .activity-dropdown-item p {
     margin: 0 0 4px;
     font-size: 13px;
-    color: #1e1b4b;
+    color: var(--text);
     font-weight: 500;
 }
 
 .activity-dropdown-item span {
     font-size: 11px;
-    color: #6b7280;
+    color: var(--muted);
 }
 
 .activity-dropdown-footer {
@@ -422,11 +422,11 @@
     padding: 12px;
     font-size: 13px;
     font-weight: 600;
-    color: #1e1b4b;
+    color: var(--text);
     text-decoration: none;
 }
 
-.activity-dropdown-footer:hover { background: #f6f7fb; }
+.activity-dropdown-footer:hover { background: var(--bg); }
 
         input[type="text"], input[type="email"], input[type="password"],
         input[type="number"], input[type="date"], select, textarea {
@@ -554,14 +554,14 @@
         .toast-title {
             font-size: 13.5px;
             font-weight: 700;
-            color: #1e1b4b;
+            color: var(--text);
             line-height: 1.2;
             margin-bottom: 2px;
         }
 
         .toast-message {
             font-size: 12.5px;
-            color: #4b5563;
+            color: var(--muted);
             line-height: 1.4;
             word-break: break-word;
         }
@@ -569,7 +569,7 @@
         .toast-close-btn {
             background: transparent;
             border: none;
-            color: #9ca3af;
+            color: var(--muted);
             cursor: pointer;
             padding: 4px;
             border-radius: 6px;
@@ -581,8 +581,8 @@
         }
 
         .toast-close-btn:hover {
-            color: #1e1b4b;
-            background: #f3f4f6;
+            color: var(--text);
+            background: var(--border);
         }
 
         .toast-progress {
@@ -803,13 +803,13 @@
     font-family: Georgia, serif;
     font-size: 15px;
     font-weight: 600;
-    color: #1e1b4b;
+    color: var(--text);
     margin: 0 0 4px;
 }
 
 .empty-state-message {
     font-size: 13px;
-    color: #6b7280;
+    color: var(--muted);
     margin: 0;
     max-width: 320px;
     margin-left: auto;
@@ -910,7 +910,7 @@
         .progress-bar-fill { height: 100%; border-radius: inherit; background: var(--primary); transition: width 0.3s ease; }
 
         .dashboard-welcome { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 28px; }
-        .dashboard-eyebrow { margin: 0 0 8px; font-size: 14px; font-weight: 600; letter-spacing: 0; color: var(--primary); }
+        .dashboard-eyebrow { margin: 0 0 6px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--primary); }
         .dashboard-welcome h1 { margin: 0; font-size: 34px; line-height: 1.2; color: var(--text); }
         .dashboard-welcome p:not(.dashboard-eyebrow) { margin: 8px 0 0; color: var(--muted); font-size: 15px; }
         .dashboard-date { padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-size: 13px; font-weight: 600; }
@@ -1218,6 +1218,10 @@
         [data-theme="dark"] input::placeholder,
         [data-theme="dark"] textarea::placeholder {
             color: #64748b;
+        }
+
+        [data-theme="dark"] .dashboard-eyebrow {
+            color: #818cf8;
         }
 
         [data-theme="dark"] .card {
