@@ -88,7 +88,7 @@
         <div class="invoices-header">
             <p class="dashboard-eyebrow">Admin Workspace</p>
             <h1 style="margin: 0 0 6px 0;">{{ $project->name }}</h1>
-            <p style="margin: 0; color: #6b7280; font-size: 14px;">Add and manage billing invoices for this project.</p>
+            <p style="margin: 0; color: var(--muted); font-size: 14px;">Add and manage billing invoices for this project.</p>
         </div>
 
         <x-card title="Add Invoice">

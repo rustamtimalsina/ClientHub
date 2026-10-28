@@ -35,7 +35,7 @@
             width: 11px;
             height: 11px;
             border-radius: 50%;
-            background: #1e1b4b;
+            background: var(--muted);
             margin-top: 5px;
             flex-shrink: 0;
         }
@@ -63,7 +63,7 @@
         .activity-description {
             margin: 0 0 6px;
             font-size: 14px;
-            color: #1e1b4b;
+            color: var(--text);
             font-weight: 500;
             line-height: 1.5;
             word-break: break-word;
@@ -80,8 +80,9 @@
         .activity-project {
             display: inline-block;
             font-size: 11.5px;
-            color: #4b5563;
-            background: #f3f4f6;
+            color: var(--muted);
+            background: var(--bg);
+            border: 1px solid var(--border);
             border-radius: 999px;
             padding: 2px 8px;
             margin-bottom: 6px;

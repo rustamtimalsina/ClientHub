@@ -168,11 +168,11 @@
 
         .milestone-card[open] .milestone-chevron {
             transform: rotate(180deg);
-            color: #1e1b4b;
+            color: var(--primary);
         }
 
         .roadmap-stepper-container {
-            background: #f8fafc;
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 14px 16px;
@@ -202,7 +202,7 @@
             font-size: 11.5px;
             font-weight: 700;
             color: var(--primary);
-            background: #eef2ff;
+            background: rgba(99, 102, 241, 0.15);
             padding: 2px 9px;
             border-radius: 999px;
             letter-spacing: 0.02em;
@@ -372,9 +372,9 @@
             }
         }
         .dropzone-box {
-            border: 2px dashed #cbd5e1;
+            border: 2px dashed var(--border);
             border-radius: 12px;
-            background: #f8fafc;
+            background: var(--surface);
             padding: 22px 16px;
             text-align: center;
             cursor: pointer;
@@ -382,8 +382,8 @@
             position: relative;
         }
         .dropzone-box:hover, .dropzone-box.is-dragover {
-            border-color: var(--primary, #4f46e5);
-            background: #eef2ff;
+            border-color: var(--primary);
+            background: var(--bg);
         }
         .dropzone-hidden-input {
             position: absolute;
@@ -405,8 +405,8 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: #e0e7ff;
-            color: var(--primary, #4f46e5);
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -418,7 +418,7 @@
         .dropzone-title {
             font-size: 13.5px;
             font-weight: 600;
-            color: #1e1b4b;
+            color: var(--text);
             display: block;
         }
         .dropzone-hint {
@@ -522,7 +522,7 @@
                             <span class="project-label">Current Project</span>
                             <h1 class="current-project-title" style="margin: 4px 0 8px 0; word-break: break-word;">{{ $project->name }}</h1>
                             @if($project->description)
-                                <p class="current-project-description" style="margin: 0; color: #4b5563; font-size: 14px; line-height: 1.5;">{{ $project->description }}</p>
+                                <p class="current-project-description" style="margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5;">{{ $project->description }}</p>
                             @endif
                         </div>
 
@@ -628,7 +628,7 @@
                             $nextMilestone = $milestones->where('status', '!=', 'completed')->whereNotNull('due_date')->sortBy('due_date')->first();
                         @endphp
                         @if($nextMilestone)
-                            <div style="margin-bottom: 14px; padding: 10px 14px; border-radius: 10px; background: #f1f0fb; font-size: 13.5px; color: #1e1b4b; display: flex; align-items: center; gap: 8px;">
+                            <div style="margin-bottom: 14px; padding: 10px 14px; border-radius: 10px; background: rgba(99, 102, 241, 0.12); border: 1px solid var(--border); font-size: 13.5px; color: var(--text); display: flex; align-items: center; gap: 8px;">
                                 <x-icon name="clock" size="16" style="color: var(--primary);" />
                                 <div>
                                     <strong>Next up:</strong> {{ $nextMilestone->title }}
@@ -646,7 +646,7 @@
                                         <div class="milestone-summary-row">
                                             <div style="min-width: 0; flex: 1;">
                                                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                                                    <strong style="font-size: 14.5px; color: #1e1b4b;">{{ $milestone->title }}</strong>
+                                                    <strong style="font-size: 14.5px; color: var(--text);">{{ $milestone->title }}</strong>
                                                     <x-status-badge :status="$milestone->status" />
                                                     @if($milestone->isOverdue())
                                                         <span class="badge badge-danger">Overdue by {{ abs($milestone->daysUntilDue()) }} day(s)</span>
@@ -759,8 +759,8 @@
                                                                 <span style="width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 700; background: {{ $cIsAdmin ? '#4f46e5' : '#0d9488' }}; color: white; flex-shrink: 0;">
                                                                     {{ $cInitials }}
                                                                 </span>
-                                                                <strong style="font-size: 12.5px; color: #1e1b4b;">{{ $comment->user->name }}</strong>
-                                                                <span style="font-size: 10.5px; font-weight: 600; padding: 1px 6px; border-radius: 999px; background: {{ $cIsAdmin ? '#e0e7ff' : '#ccfbf1' }}; color: {{ $cIsAdmin ? '#3730a3' : '#115e59' }};">
+                                                                <strong style="font-size: 12.5px; color: var(--text);">{{ $comment->user->name }}</strong>
+                                                                <span style="font-size: 10.5px; font-weight: 600; padding: 1px 6px; border-radius: 999px; background: {{ $cIsAdmin ? 'rgba(99, 102, 241, 0.18)' : 'rgba(13, 148, 136, 0.18)' }}; color: {{ $cIsAdmin ? 'var(--primary)' : '#2dd4bf' }};">
                                                                     {{ $cIsAdmin ? 'Admin' : 'Client' }}
                                                                 </span>
                                                             </div>
@@ -768,7 +768,7 @@
                                                                 &middot; {{ $comment->created_at->diffForHumans() }}
                                                             </span>
                                                         </div>
-                                                        <div style="font-size: 13px; line-height: 1.5; color: #334155; padding-left: 31px; white-space: pre-wrap; word-break: break-word;">
+                                                        <div style="font-size: 13px; line-height: 1.5; color: var(--text); padding-left: 31px; white-space: pre-wrap; word-break: break-word;">
                                                             {{ $comment->body }}
                                                         </div>
                                                     </div>
@@ -922,7 +922,7 @@
                                             <strong>{{ $file->original_name }}</strong>
                                             <span style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 2px;">
                                                 @if($formattedSize)
-                                                    <span style="background: #f1f5f9; padding: 1px 6px; border-radius: 4px; font-size: 11px; font-weight: 500; color: #475569;">{{ $formattedSize }}</span>
+                                                    <span style="background: var(--bg); padding: 1px 6px; border-radius: 4px; font-size: 11px; font-weight: 500; color: var(--muted); border: 1px solid var(--border);">{{ $formattedSize }}</span>
                                                     <span>·</span>
                                                 @endif
                                                 <span>Uploaded {{ $file->created_at->format('M d, Y') }}</span>
@@ -979,7 +979,7 @@
                                 </div>
 
                                 <div class="invoice-card-buttons">
-                                    <a href="{{ route('invoices.download', $invoice) }}" class="btn btn-small" style="background: white; border: 1px solid var(--border); color: #374151;">
+                                    <a href="{{ route('invoices.download', $invoice) }}" class="btn btn-small">
                                         Download PDF
                                     </a>
 

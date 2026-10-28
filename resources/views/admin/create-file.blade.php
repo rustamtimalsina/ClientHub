@@ -10,7 +10,8 @@
             padding: 12px 14px;
             border-radius: 10px;
             border: 1px dashed var(--border);
-            background: #fafafa;
+            background: var(--surface);
+            color: var(--text);
             font-size: 14px;
             font-family: inherit;
             cursor: pointer;
@@ -67,7 +68,7 @@
 
         .file-meta strong {
             font-size: 14px;
-            color: #1e1b4b;
+            color: var(--text);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -107,9 +108,9 @@
             }
         }
         .dropzone-box {
-            border: 2px dashed #cbd5e1;
+            border: 2px dashed var(--border);
             border-radius: 12px;
-            background: #f8fafc;
+            background: var(--surface);
             padding: 24px 16px;
             text-align: center;
             cursor: pointer;
@@ -117,8 +118,8 @@
             position: relative;
         }
         .dropzone-box:hover, .dropzone-box.is-dragover {
-            border-color: var(--primary, #4f46e5);
-            background: #eef2ff;
+            border-color: var(--primary);
+            background: var(--bg);
         }
         .dropzone-hidden-input {
             position: absolute;
@@ -140,8 +141,8 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: #e0e7ff;
-            color: var(--primary, #4f46e5);
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -153,12 +154,12 @@
         .dropzone-title {
             font-size: 13.5px;
             font-weight: 600;
-            color: #1e1b4b;
+            color: var(--text);
             display: block;
         }
         .dropzone-hint {
             font-size: 11.5px;
-            color: #6b7280;
+            color: var(--muted);
             display: block;
             margin-top: 2px;
         }
@@ -181,7 +182,7 @@
         .dropzone-preview-name {
             font-size: 13px;
             font-weight: 600;
-            color: #1e1b4b;
+            color: var(--text);
             display: block;
             white-space: nowrap;
             overflow: hidden;
@@ -332,7 +333,7 @@
                 <select name="uploader"
                         id="uploader"
                         onchange="this.form.submit()"
-                        style="padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: white; font-size: 14px; min-width: 200px;">
+                        style="padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 14px; min-width: 200px;">
 
                     <option value="">All uploaders</option>
 
@@ -392,7 +393,7 @@
                                     <strong title="{{ $file->original_name }}">{{ $file->original_name }}</strong>
                                     <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-top: 2px;">
                                         @if($formattedSize)
-                                            <span style="background: #f1f5f9; padding: 1px 6px; border-radius: 4px; font-weight: 500; color: #475569;">{{ $formattedSize }}</span>
+                                            <span style="background: var(--bg); padding: 1px 6px; border-radius: 4px; font-weight: 500; color: var(--muted); border: 1px solid var(--border);">{{ $formattedSize }}</span>
                                             <span>&middot;</span>
                                         @endif
                                         <span>Uploaded {{ $file->created_at->format('M d, Y') }}</span>
@@ -440,12 +441,12 @@
 
                 {{-- Previous --}}
                 @if($files->onFirstPage())
-                    <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: #999; background: #f5f5f5;">
+                    <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); background: var(--bg);">
                         Previous
                     </span>
                 @else
                     <a href="{{ $files->previousPageUrl() }}"
-                    style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: white;">
+                    style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: var(--surface);">
                         Previous
                     </a>
                 @endif
@@ -458,7 +459,7 @@
                         </span>
                     @else
                         <a href="{{ $url }}"
-                        style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: white;">
+                        style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: var(--surface);">
                             {{ $page }}
                         </a>
                     @endif
@@ -467,11 +468,11 @@
                 {{-- Next --}}
                 @if($files->hasMorePages())
                     <a href="{{ $files->nextPageUrl() }}"
-                    style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: white;">
+                    style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; background: var(--surface);">
                         Next
                     </a>
                 @else
-                    <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: #999; background: #f5f5f5;">
+                    <span style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); background: var(--bg);">
                         Next
                     </span>
                 @endif

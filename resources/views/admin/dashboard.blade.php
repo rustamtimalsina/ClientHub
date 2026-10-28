@@ -273,7 +273,7 @@
                 <div class="stat-card-inner">
                     <div class="stat-card-top">
                         <span class="info-label">Total Clients</span>
-                        <div class="stat-icon-wrap" style="background: #eef2ff; color: #4f46e5;">
+                        <div class="stat-icon-wrap" style="background: rgba(99, 102, 241, 0.15); color: var(--primary);">
                             <x-icon name="users" size="18" />
                         </div>
                     </div>
@@ -443,11 +443,11 @@
                     @foreach($recentProjects as $project)
                         <div class="recent-project-row">
                             <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
-                                <div style="width: 36px; height: 36px; border-radius: 8px; background: #eef2ff; color: #4f46e5; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(99, 102, 241, 0.15); color: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                                     <x-icon name="folder" size="18" />
                                 </div>
                                 <div style="min-width: 0; display: flex; flex-direction: column; gap: 2px;">
-                                    <strong style="font-size: 14.5px; color: #1e1b4b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    <strong style="font-size: 14.5px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                         <a href="{{ route('admin.milestones.create', $project) }}" style="color: inherit; text-decoration: none;">
                                             {{ $project->name }}
                                         </a>
@@ -581,6 +581,10 @@
         });
     </script>
     <script>
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const chartTextColor = isDark ? '#94a3b8' : '#6b7280';
+        const chartGridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : '#f1f0fb';
+
         const revCanvas = document.getElementById('revenueChart');
         const revCtx = revCanvas.getContext('2d');
         const revGradient = revCtx.createLinearGradient(0, 0, 0, 220);
@@ -615,7 +619,9 @@
                 plugins: {
                     legend: { display: false },
                     tooltip: {
-                        backgroundColor: '#1e1b4b',
+                        backgroundColor: isDark ? '#1e293b' : '#1e1b4b',
+                        titleColor: '#ffffff',
+                        bodyColor: '#ffffff',
                         padding: 12,
                         cornerRadius: 8,
                         displayColors: false,
@@ -633,11 +639,15 @@
                     y: {
                         beginAtZero: true,
                         ticks: {
+                            color: chartTextColor,
                             callback: function(value) { return 'NPR ' + Number(value).toLocaleString(); }
                         },
-                        grid: { color: '#f1f0fb' }
+                        grid: { color: chartGridColor }
                     },
-                    x: { grid: { display: false } }
+                    x: {
+                        ticks: { color: chartTextColor },
+                        grid: { display: false }
+                    }
                 }
             }
         });

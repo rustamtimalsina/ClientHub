@@ -25,7 +25,12 @@
             padding: 16px;
             border: 1px solid var(--border);
             border-radius: 10px;
-            background: #fafafa;
+            background: var(--surface);
+            transition: all 0.15s ease;
+        }
+
+        .client-row:hover {
+            border-color: var(--primary);
         }
 
         .client-info {
@@ -45,7 +50,7 @@
 
         .client-email {
             font-size: 13px;
-            color: #4b5563;
+            color: var(--muted);
             word-break: break-all;
         }
 
@@ -146,13 +151,13 @@
                         <div class="client-row">
                             <div class="client-info">
                                 <div class="client-name-badge">
-                                    <strong style="font-size: 15px; color: #1e1b4b;">{{ $client->name }}</strong>
+                                    <strong style="font-size: 15px; color: var(--text);">{{ $client->name }}</strong>
                                     @if($client->invitation_token)
-                                        <span style="font-size: 11px; padding: 2px 8px; border-radius: 9999px; background: #fef3c7; color: #b45309; font-weight: 600;">
+                                        <span style="font-size: 11px; padding: 2px 8px; border-radius: 9999px; background: var(--warning-bg); color: var(--warning-text); font-weight: 600;">
                                             Pending Setup
                                         </span>
                                     @else
-                                        <span style="font-size: 11px; padding: 2px 8px; border-radius: 9999px; background: #dcfce7; color: #15803d; font-weight: 600;">
+                                        <span style="font-size: 11px; padding: 2px 8px; border-radius: 9999px; background: var(--success-bg); color: var(--success-text); font-weight: 600;">
                                             Active
                                         </span>
                                     @endif
@@ -173,7 +178,7 @@
                                 @if($client->invitation_token)
                                     <form method="POST" action="{{ route('admin.clients.resend-invite', $client) }}">
                                         @csrf
-                                        <button type="submit" class="btn btn-small" style="background: #eef2ff; color: var(--primary); border-color: #c7d2fe;">
+                                        <button type="submit" class="btn btn-small" style="background: rgba(99, 102, 241, 0.15); color: var(--primary); border-color: rgba(99, 102, 241, 0.3);">
                                             Resend Invite
                                         </button>
                                     </form>

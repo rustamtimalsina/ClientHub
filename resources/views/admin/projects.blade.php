@@ -437,12 +437,12 @@
             <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
                 <div style="display: flex; gap: 6px;">
                     <a href="{{ route('admin.projects.index') }}"
-                       style="padding: 7px 14px; border: 1px solid {{ $view === 'active' ? '#1e1b4b' : 'var(--border)' }}; border-radius: 999px; text-decoration: none; font-size: 13px; font-weight: 500; background: {{ $view === 'active' ? '#1e1b4b' : 'var(--surface)' }}; color: {{ $view === 'active' ? '#ffffff' : 'inherit' }}; display: inline-flex; align-items: center; gap: 6px;">
+                       style="padding: 7px 14px; border: 1px solid {{ $view === 'active' ? 'var(--primary)' : 'var(--border)' }}; border-radius: 999px; text-decoration: none; font-size: 13px; font-weight: 500; background: {{ $view === 'active' ? 'var(--primary)' : 'var(--surface)' }}; color: {{ $view === 'active' ? '#ffffff' : 'inherit' }}; display: inline-flex; align-items: center; gap: 6px;">
                         <span>Active</span>
                         <span style="background: {{ $view === 'active' ? 'rgba(255,255,255,0.2)' : 'var(--border)' }}; padding: 1px 7px; border-radius: 999px; font-size: 11px;">{{ $activeCount }}</span>
                     </a>
                     <a href="{{ route('admin.projects.index', ['view' => 'archived']) }}"
-                       style="padding: 7px 14px; border: 1px solid {{ $view === 'archived' ? '#1e1b4b' : 'var(--border)' }}; border-radius: 999px; text-decoration: none; font-size: 13px; font-weight: 500; background: {{ $view === 'archived' ? '#1e1b4b' : 'var(--surface)' }}; color: {{ $view === 'archived' ? '#ffffff' : 'inherit' }}; display: inline-flex; align-items: center; gap: 6px;">
+                       style="padding: 7px 14px; border: 1px solid {{ $view === 'archived' ? 'var(--primary)' : 'var(--border)' }}; border-radius: 999px; text-decoration: none; font-size: 13px; font-weight: 500; background: {{ $view === 'archived' ? 'var(--primary)' : 'var(--surface)' }}; color: {{ $view === 'archived' ? '#ffffff' : 'inherit' }}; display: inline-flex; align-items: center; gap: 6px;">
                         <span>Archived</span>
                         <span style="background: {{ $view === 'archived' ? 'rgba(255,255,255,0.2)' : 'var(--border)' }}; padding: 1px 7px; border-radius: 999px; font-size: 11px;">{{ $archivedCount }}</span>
                     </a>

@@ -53,15 +53,15 @@
 
         .comment-bubble {
             margin-top: 10px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
+            background: var(--bg);
+            border: 1px solid var(--border);
             border-radius: 10px;
             padding: 12px 14px;
             transition: border-color 0.15s ease;
         }
 
         .comment-bubble:hover {
-            border-color: #cbd5e1;
+            border-color: var(--primary);
         }
 
         @media (max-width: 768px) {
@@ -206,12 +206,12 @@
 
                             {{-- Revision Notes Callout --}}
                             @if($milestone->client_notes && $milestone->status !== 'completed')
-                                <div style="margin-top: 14px; background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid #f59e0b; border-radius: 8px; padding: 12px 14px;">
+                                <div style="margin-top: 14px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); border-left: 4px solid #f59e0b; border-radius: 8px; padding: 12px 14px;">
                                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                                        <strong style="font-size: 13px; color: #92400e; text-transform: uppercase; letter-spacing: 0.04em;">Client Revision Notes</strong>
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                                        <strong style="font-size: 13px; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.04em;">Client Revision Notes</strong>
                                     </div>
-                                    <div style="font-size: 13.5px; color: #78350f; line-height: 1.5; white-space: pre-wrap;">{{ $milestone->client_notes }}</div>
+                                    <div style="font-size: 13.5px; color: var(--text); line-height: 1.5; white-space: pre-wrap;">{{ $milestone->client_notes }}</div>
                                 </div>
                             @endif
 
@@ -219,7 +219,7 @@
                             <div class="milestone-comments-section">
 
                                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                                    <span style="font-size: 13px; font-weight: 700; color: #1e1b4b; text-transform: uppercase; letter-spacing: 0.03em; display: inline-flex; align-items: center; gap: 6px;">
+                                    <span style="font-size: 13px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.03em; display: inline-flex; align-items: center; gap: 6px;">
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                                         Comments
                                     </span>
@@ -244,8 +244,8 @@
                                                     <span style="width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; background: {{ $cIsAdmin ? '#4f46e5' : '#0d9488' }}; color: white; flex-shrink: 0;">
                                                         {{ $cInitials }}
                                                     </span>
-                                                    <strong style="font-size: 13px; color: #1e1b4b;">{{ $comment->user->name }}</strong>
-                                                    <span style="font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; background: {{ $cIsAdmin ? '#e0e7ff' : '#ccfbf1' }}; color: {{ $cIsAdmin ? '#3730a3' : '#115e59' }};">
+                                                    <strong style="font-size: 13px; color: var(--text);">{{ $comment->user->name }}</strong>
+                                                    <span style="font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; background: {{ $cIsAdmin ? 'rgba(99, 102, 241, 0.2)' : 'rgba(20, 184, 166, 0.2)' }}; color: {{ $cIsAdmin ? '#818cf8' : '#2dd4bf' }};">
                                                         {{ $cIsAdmin ? 'Admin' : 'Client' }}
                                                     </span>
                                                 </div>
@@ -253,7 +253,7 @@
                                                     &middot; {{ $comment->created_at->diffForHumans() }}
                                                 </span>
                                             </div>
-                                            <div style="font-size: 13.5px; line-height: 1.5; color: #334155; padding-left: 34px; white-space: pre-wrap; word-break: break-word;">
+                                            <div style="font-size: 13.5px; line-height: 1.5; color: var(--text); padding-left: 34px; white-space: pre-wrap; word-break: break-word;">
                                                 {{ $comment->body }}
                                             </div>
                                         </div>

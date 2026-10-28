@@ -14,7 +14,7 @@
             margin-bottom: 6px;
             font-size: 14px;
             font-weight: 600;
-            color: #1e1b4b;
+            color: var(--text);
         }
 
         .form-control {
@@ -82,7 +82,7 @@
         <div class="form-header">
             <p class="dashboard-eyebrow">Admin Workspace</p>
             <h1 style="margin: 0 0 6px 0;">Create New Project</h1>
-            <p style="margin: 0; color: #6b7280; font-size: 14px;">Assign a new project to a client.</p>
+            <p style="margin: 0; color: var(--muted); font-size: 14px;">Assign a new project to a client.</p>
         </div>
 
         <x-card>
@@ -144,7 +144,7 @@
                 </div>
 
                 <div class="form-actions">
-                    <a href="{{ route('admin.projects.index') }}" class="btn" style="background: transparent; border: 1px solid var(--border); color: #374151;">
+                    <a href="{{ route('admin.projects.index') }}" class="btn" style="background: transparent; border: 1px solid var(--border); color: var(--muted);">
                         Cancel
                     </a>
                     <button type="submit" class="btn btn-success" style="padding: 10px 22px;">
